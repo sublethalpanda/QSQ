@@ -32,8 +32,8 @@ def getInput():
     global player
     options = [];
     if(gameState == "Load"):
-        options.append("new game")
-        options.append("load game")
+        options.append("new")
+        options.append("load")
     if gameState == "Running":
         options.append("fight")
         options.append("level")
@@ -56,11 +56,11 @@ def getInput():
 
 def doStuff(usrin):
     global quit
-    if usrin == "new game":
+    if "new" in usrin:
         charCreate(False)
-    elif usrin == "load game":
+    elif "load" in usrin:
         load()
-    elif usrin == "save game":
+    elif "save" in usrin:
         save()
     elif usrin == "level":
         player.AP = 100
