@@ -19,6 +19,7 @@ quit = False
 ##############################################################################################
 def _main():
     global gameState
+    global quit
     gameState = "Load"
     while not quit:
         doStuff(getInput())
@@ -48,6 +49,7 @@ def getInput():
     doStuff(validateInput)
             
 def doStuff(input):
+    global quit
     if input == "New Game":
         charCreate(False)
     if input == "Load Game":
