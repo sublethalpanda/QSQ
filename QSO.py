@@ -56,6 +56,19 @@ def doStuff(input):
         pass #attach the load function
     if input == "Exit":
         quit == True
+
+def save():
+    if os.path.isfile("player.qso"):
+        os.remove("player.qso")
+    global player
+    pickle.dump(player, open( "player.qso","wb"))
+
+def load():
+    if os.path.isfile("player.qso"):
+        global player
+        player = pickle.load( open( "player.qso","rb"))
+        global loadingFlag
+        loadingFlag = True
         
 def main():
     newGame()
