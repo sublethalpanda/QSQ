@@ -56,7 +56,7 @@ def getInput():
 
 def doStuff(usrin):
     global quit
-    if "new" in usrin:
+    if usrin == "new":
         charCreate(False)
     elif "load" in usrin:
         load()
