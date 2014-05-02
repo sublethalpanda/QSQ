@@ -30,7 +30,6 @@ def RadixSortAux(array, digit):
     Empty = True
     digits = [KVEntry()]*len(array)
     SortedArray = [int]*len(array)
-    print(len(array))
     for i in range(0, len(array)):
         digits[i] = KVEntry()
         digits[i].key = i

@@ -51,21 +51,30 @@ class Character(object):
 
 
     def __str__(self):
+        disp = ""
         #Name and title
-        print("\t\t"+self.name,"Level",self.level,"\n\t   Character Summary","\n\t\t Age:",self.age[0])
+        disp += "\t\t"+self.name,"Level",self.level,"\n\t   Character Summary","\n\t\t Age:",self.age[0]
         #Health
-        print("\tHP:",str(self.HP[0])+"/"+str(self.HP[1]))
+        disp +="\n"
+        disp += "\tHP:",str(self.HP[0])+"/"+str(self.HP[1])
         #Stats
-        print("\tSTR:",self.STR,"\n\tDEX:",self.DEX,"\n\tMND",self.MND)
+        disp += "\n"
+        disp += "\tSTR:",self.STR,"\n\tDEX:",self.DEX,"\n\tMND",self.MND
         if self.LCK>=5 or self.LCK <=-5:
-            print("\tLCK:",self.LCK)
+            disp += "\n"
+            disp += "\tLCK:",self.LCK
         #Magic and Psychic
         if self.manaEnabled == True:
-            print("MP:",str(self.MP[0])+"/"+str(self.MP[1]))
-            print("PP:",str(self.PP[0])+"/"+str(self.PP[1]))
+            disp += "\n"
+            disp += "MP:",str(self.MP[0])+"/"+str(self.MP[1])
+            disp += "\n"
+            disp += "PP:",str(self.PP[0])+"/"+str(self.PP[1])
         #Weapon and armor
-        print("Equipped Weapon:",self.weapon[2],"\nEquipped Armor:",self.armor[1])
-        print('"'+self.description+'"')
+        disp += "\n"
+        disp += "Equipped Weapon:",self.weapon[2],"\nEquipped Armor:",self.armor[1]
+        disp += "\n"
+        disp += '"'+self.description+'"'
+        return disp
 
     def checkLevel(self):
         while player.AP >= 100:
@@ -187,3 +196,8 @@ class Character(object):
         except:
             pass
         return roll
+
+    def hitSomethign(self, entities):
+        target = None
+        while not target == self:
+            target = entities[randint(0, len(entities))]
