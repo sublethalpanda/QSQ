@@ -59,10 +59,15 @@ def getInput():
 
 def doStuff(usrin):
     global quit
+<<<<<<< HEAD
     while usrin == None:
         usrin = getInput()
     if "new" in usrin:
         create()
+=======
+    if usrin == "new":
+        charCreate(False)
+>>>>>>> 0d5ab6c8df02b4c185d8cd22bed80a240b9abf81
     elif "load" in usrin:
         load()
     elif "save" in usrin:
