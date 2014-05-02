@@ -51,18 +51,23 @@ def getInput():
             valid = True;
     doStuff(validateInput)
 
-def doStuff(input):
+def doStuff(usrin):
     global quit
-    if input == "new game":
+    if usrin == "new game":
         charCreate(False)
-    elif input == "load game":
+    elif usrin == "load game":
         load()
-    elif input == "save game":
+    elif usrin == "save game":
         save()
-    elif input == "level":
+    elif usrin == "level":
         player.AP = 100
         player.checkLevel()
-    elif input == "exit":
+    elif usrin == "fight":
+        entities = []
+        entities.append(player)
+        entities.append(createEnemy(1))
+        _combat(entities)
+    elif usrin == "exit":
         quit = True
 
 def save():
@@ -72,11 +77,15 @@ def save():
     pickle.dump(player, open( "player.qso","wb"))
 
 def load():
+    global gameState
     if os.path.isfile("player.qso"):
         global player
         player = pickle.load( open( "player.qso","rb"))
         global loadingFlag
         loadingFlag = True
+        gameState = "Running"
+    else:
+        print("Player not found")
 
 def main():
     newGame()
@@ -269,29 +278,35 @@ def createEnemy(level):
     for i in range(level):
         levelSelect = randint(1,5)
         foe.levelUp(levelSelect)
+    return foe
 
 def _combat(entities):
     sEntities = sortEntities(entities)
     for i in range(0, len(sEntities)):
-        sEntities[i].hitSomething(sEntities)
+        #sEntities[i].hitSomething(sEntities)
+        pass
 
 def sortEntities(entities):
     orderedEntities = []
     orderedInitiative = []
     initiative = []
     neg = 0
-    for i in range(0, len(entites)):
+    for i in range(0, len(entities)):
         initiative.append(entities[i].initiative())
-        if initiative[i] < neg:
-            initiative[i] = neg
+        try:
+            if int(initiative[i]) < neg:
+                initiative[i] = neg
+        except:
+            pass
     for i in range(0, len(initiative)):
-        initiative[i] += neg
+        initiative[i] = int(initiative[i]) + neg
     orderedInitiative = Sort(initiative)
     for i in range(0, len(orderedInitiative)):
         for j in range(0, len(initiative)):
             if orderedInitiative[i] == initiative[j]:
                 orderedEntities.append(entities[j])
                 break
+    return orderedEntities
 
 def combat():
     global combatFlag
@@ -397,12 +412,13 @@ def Sort(array):
     return RadixSortAux(array, 1)
 def RadixSortAux(array, digit):
     Empty = True
-    digits = [len(array)]
-    SortedArray = [len(array)]
+    digits = [KVEntry()]*len(array)
+    SortedArray = [int]*len(array)
     for i in range(0, len(array)):
         digits[i] = KVEntry()
-        digits[i].key(i)
-        digits[i].value((array[i]/digit) % 10)
+        digits[i].key = i
+        print(str((array[i]/digit) % 10) + "LOOK!!!")
+        digits[i].value = (array[i]/digit) % 10
         if array[i] / digit != 0:
             Empty = False
     if Empty:
@@ -410,36 +426,36 @@ def RadixSortAux(array, digit):
 
     SortedDigits = CountingSort(digits)
     for i in range(0, len(SortedArray)):
-        SortedArray[i] = array[SortedDigits[i].key()]
+        SortedArray[i] = array[SortedDigits[i].key]
     return RadixSortAux(SortedArray, digit * 10)
 
 def CountingSort(ArrayA):
-    ArrayB = [MaxValue(ArrayA) + 1]
-    ArrayC = [len(ArrayA)]
+    ArrayB = [int]*(MaxValue(ArrayA) + 1)
+    ArrayC = [KVEntry()]*len(ArrayA)
 
     for i in range(0, len(ArrayB)):
         ArrayB[i] = 0
 
     for i in range(0, len(ArrayA)):
-        ArrayB[ArrayA[i].value()] += 1
+        ArrayB[ArrayA[i].value] += 1
 
-    for i in range(0, len(ArrayA)):
+    for i in range(1, len(ArrayB)):
         ArrayB[i] += ArrayB[i - 1]
 
     for i in range(len(ArrayA)-1, -1, -1):
-        value = ArrayA[i].value()
+        value = ArrayA[i].value
         index = ArrayB[value]
         ArrayB[value] -= 1
         ArrayC[index-1] = KVEntry()
-        ArrayC[index-1].key(i)
-        ArrayC[index-1].value(value)
+        ArrayC[index-1].key = i
+        ArrayC[index-1].value = value
 
     return ArrayC
 
 def MaxValue(arr):
-    Max = arr[0].value()
+    Max = arr[0].value
     for i in range(1, len(arr)):
-        if arr[i].value() > Max:
+        if arr[i].value > Max:
             Max = arr[i].value()
     return Max
 
@@ -632,9 +648,11 @@ class Character(object):
         print ("The",foe.name,"dies, giving you",apGain,"AP")
 
     def initiative(self):
-        roll = roll(self)
-        if type(roll) is str:
-            roll = roll + self.DEX
+        roll = self.roll()
+        try:
+            roll + self.DEX
+        except:
+            pass
         return roll
 class KVEntry:
     _key = 0;
@@ -651,11 +669,12 @@ class KVEntry:
 
     @property
     def value(self):
-        return _value
+        return self._value
 
     @value.setter
     def value(self, value):
         _value = value
+
 
 ##############################################################################################
 #                                       Run
