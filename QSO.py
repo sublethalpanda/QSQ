@@ -538,7 +538,7 @@ class Character(object):
 
         while not levelFlag:
             lvlIn = input("\n>").lower()
-            options = ["str", "dex", "mnd", "lck", "hp die"]
+            options = ["str", "dex", "mnd", "lck", "hp die","roll hp","mp die","roll mp","pp die", "roll pp","damage"]
             results = ["STR increased!", "DEX increased!", "MND increased!",
                        "LCK increased!", "HP die increased"]
             try:
