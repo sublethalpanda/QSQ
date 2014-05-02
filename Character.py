@@ -49,7 +49,7 @@ class Character(object):
         self.manaEnabled = pManaEnabled
 
 
-    def summary(self):
+    def __str__(self):
         #Name and title
         print("\t\t"+self.name,"Level",self.level,"\n\t   Character Summary","\n\t\t Age:",self.age[0])
         #Health
