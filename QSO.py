@@ -26,12 +26,14 @@ def _main():
 
 def getInput():
     global gameState
+    global player
     options = [];
     if(gameState == "Load"):
         options.append("new game")
         options.append("load game")
     if gameState == "Running":
         options.append("fight")
+        options.append("level")
         options.append("save game")
     if gameState == "Combat":
         pass
@@ -44,20 +46,22 @@ def getInput():
     stroptions += ")"
     valid = False
     while not valid:
-        validateInput = input("What would you like to do? " + str(stroptions) + "\n>")
+        validateInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
         if validateInput in options:
             valid = True;
     doStuff(validateInput)
 
 def doStuff(input):
     global quit
-    input = input.lower()
     if input == "new game":
         charCreate(False)
     elif input == "load game":
         load()
     elif input == "save game":
         save()
+    elif input == "level":
+        player.AP = 100
+        player.checkLevel()
     elif input == "exit":
         quit = True
 
@@ -266,12 +270,12 @@ def createEnemy(level):
         levelSelect = randint(1,5)
         foe.levelUp(levelSelect)
 
-def _combat(entities[]):
+def _combat(entities):
     sEntities = sortEntities(entities)
     for i in range(0, len(sEntities)):
         sEntities[i].hitSomething(sEntities)
 
-def sortEntities(entities[]):
+def sortEntities(entities):
     orderedEntities = []
     orderedInitiative = []
     initiative = []
@@ -285,7 +289,7 @@ def sortEntities(entities[]):
     orderedInitiative = Sort(initiative)
     for i in range(0, len(orderedInitiative)):
         for j in range(0, len(initiative)):
-            if orderedInitiative[i] = initiative[j]:
+            if orderedInitiative[i] == initiative[j]:
                 orderedEntities.append(entities[j])
                 break
 
@@ -305,49 +309,7 @@ def combat():
         else:
             foeAtk()
             playerAtk()
-    while player.AP >= 100:
-        print("""What would you like to level up?
-1.  STR
-2.  DEX
-3.  MND
-4.  LCK
-5.  HP Die
-6.  Roll and add HP die to HP
-7.  Mana Die
-8.  Roll and add MP Die
-9.  Psychic Die
-10. Roll and add Psychic Die
-11. Upgrade damage die for current weapon""")
-    
-        while levelFlag == False
-        lvlIn = input("\n>").lower()
-        if lvlIn == 1 or lvlIn =="str":
-            player.levelUp(1)
-            lvlOut = "STR increased!"
-        elif lvlIn == 2 or lvlIn == "dex"
-            player.levelUp(2)
-            lvlOut = "DEX increased!"
-        elif lvlin == 3 or lvlIn == "mnd"
-            player.levelUp(3)
-            lvlOut = "MND increased!"
-        elif lvlIn == 4 or lvlIn == "lck"
-            if self.LCK >=5 or self.LCK <= -5:
-                player.levelUp(4)
-                lvlOut = "LCK increased!"
-            else:
-                print("You don't have access to the LCK stat!")
-                continue
-        elif lvlIn == 5 or lvlIn == "hp die":
-            player.levelUp(5)
-            lvlOut = "HP die increased!"
-        
-            
-
-        
-        player.level += 1
-        levelFlag = True
-        print("Player leveled up!")
-        print(lvlOut)
+    player.checkLevel()
 
 def playerAtk():
     attackFlag = False
@@ -441,8 +403,8 @@ def RadixSortAux(array, digit):
         digits[i] = KVEntry()
         digits[i].key(i)
         digits[i].value((array[i]/digit) % 10)
-        if array[i] / digit != 0
-        Empty = False
+        if array[i] / digit != 0:
+            Empty = False
     if Empty:
         return array
 
@@ -459,7 +421,7 @@ def CountingSort(ArrayA):
         ArrayB[i] = 0
 
     for i in range(0, len(ArrayA)):
-        ArrayB[ArrayA[i].value()]++
+        ArrayB[ArrayA[i].value()] += 1
 
     for i in range(0, len(ArrayA)):
         ArrayB[i] += ArrayB[i - 1]
@@ -467,12 +429,12 @@ def CountingSort(ArrayA):
     for i in range(len(ArrayA)-1, -1, -1):
         value = ArrayA[i].value()
         index = ArrayB[value]
-        ArrayB[value]--
+        ArrayB[value] -= 1
         ArrayC[index-1] = KVEntry()
         ArrayC[index-1].key(i)
         ArrayC[index-1].value(value)
 
-    reutrn ArrayC
+    return ArrayC
 
 def MaxValue(arr):
     Max = arr[0].value()
@@ -496,10 +458,18 @@ class Character(object):
     MND = 0
     LCK = 0
     weapon = []
-    armor =
+    armor = []
     inventory = []
     description = ""
     age = 0
+    BAS = ""
+    BDS = ""
+    HP = 0
+    level = 0
+    AP = 0
+    MP = 0
+    PP = 0
+    manaEnabled = False
     def __init__(self,pName,pStr,pDex,pMnd,pLck,pWeapon, pArmor, pInventory, pHp, pLevel, pAp, pDescription, pAge, pMp, pPp, pManaEnabled):
         "An entity that can attack"
         self.name = pName
@@ -546,6 +516,44 @@ class Character(object):
         #Weapon and armor
         print("Equipped Weapon:",self.weapon[2],"\nEquipped Armor:",self.armor[1])
         print('"'+self.description+'"')
+
+    def checkLevel(self):
+        while player.AP >= 100:
+            self.doLevel()
+
+    def doLevel(self):
+        levelFlag = False
+        print("""What would you like to level up?
+1.  STR
+2.  DEX
+3.  MND
+4.  LCK
+5.  HP Die
+6.  Roll and add HP die to HP
+7.  Mana Die
+8.  Roll and add MP Die
+9.  Psychic Die
+10. Roll and add Psychic Die
+11. Upgrade damage die for current weapon""")
+
+        while not levelFlag:
+            lvlIn = input("\n>").lower()
+            options = ["str", "dex", "mnd", "lck", "hp die"]
+            results = ["STR increased!", "DEX increased!", "MND increased!",
+                       "LCK increased!", "HP die increased"]
+            try:
+                lvlIn = int(lvlIn)
+            except:
+                lvlIn = options.index(lvlIn) + 1
+            if lvlIn == 4 and (self.LCK >=5 or self.LCK <= -5):
+                print("You don't have access to the LCK stat!")
+            else:
+                self.levelUp(lvlIn)
+                print(results[lvlIn-1])
+                self.level += 1
+                levelFlag = True
+                self.AP -= 100
+                print("Player leveled up!")
 
     def levelUp(self,selection):
         #str, dex, mnd, lck, hpdie, roll hp,
@@ -636,7 +644,7 @@ class KVEntry:
     def key(self):
         return self._key
 
-    @x.setter
+    @key.setter
     def key(self, value):
         if value >= 0:
             _key = value
@@ -645,6 +653,7 @@ class KVEntry:
     def value(self):
         return _value
 
+    @value.setter
     def value(self, value):
         _value = value
 
