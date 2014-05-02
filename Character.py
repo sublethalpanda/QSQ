@@ -1,4 +1,5 @@
 from random import randint
+import sys
 
 class Character(object):
     name = ""
@@ -169,11 +170,10 @@ class Character(object):
     def roll(self):
         tempRoll = randint(1,20)
         if tempRoll == 1:
-            temproll = -sys.maxint -1
+            tempRoll = -sys.maxsize -1
         elif tempRoll == 20:
-            return sys.maxint
-        else:
-            return tempRoll
+            tempRoll = sys.maxsize
+        return tempRoll
 
     def die(self):
         apGain = int(foe.AP/player.level)
