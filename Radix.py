@@ -1,3 +1,5 @@
+import math
+
 class KVEntry:
     _key = 0;
     _value = 0;
@@ -28,16 +30,16 @@ def RadixSortAux(array, digit):
     Empty = True
     digits = [KVEntry()]*len(array)
     SortedArray = [int]*len(array)
+    print(len(array))
     for i in range(0, len(array)):
         digits[i] = KVEntry()
         digits[i].key = i
-        print(str((array[i]/digit) % 10) + "LOOK!!!")
-        digits[i].value = (array[i]/digit) % 10
-        if array[i] / digit != 0:
+        number = math.floor(array[i]/digit)
+        digits[i].value = math.floor(number % 10)
+        if number != 0:
             Empty = False
     if Empty:
         return array
-
     SortedDigits = CountingSort(digits)
     for i in range(0, len(SortedArray)):
         SortedArray[i] = array[SortedDigits[i].key]
@@ -70,5 +72,5 @@ def MaxValue(arr):
     Max = arr[0].value
     for i in range(1, len(arr)):
         if arr[i].value > Max:
-            Max = arr[i].value()
+            Max = arr[i].value
     return Max

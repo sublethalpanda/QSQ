@@ -169,9 +169,9 @@ class Character(object):
     def roll(self):
         tempRoll = randint(1,20)
         if tempRoll == 1:
-            return "fumble"
+            temproll = -sys.maxint -1
         elif tempRoll == 20:
-            return "crit"
+            return sys.maxint
         else:
             return tempRoll
 

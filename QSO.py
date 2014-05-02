@@ -301,22 +301,13 @@ def sortEntities(entities):
         except:
             pass
     for i in range(0, len(initiative)):
-        try:
-            initiative[i] = int(initiative[i]) + neg
-        except:
-            initiative.remove(initiative[i])
+        initiative[i] = int(initiative[i]) + neg
     orderedInitiative = Sort(initiative)
-    for i in range(0, len(initiative)):
-        if initiative[i] == "fumble":
-            orderderedEntities.append(entities[i])
     for i in range(0, len(orderedInitiative)):
         for j in range(0, len(initiative)):
             if orderedInitiative[i] == initiative[j]:
                 orderedEntities.append(entities[j])
                 break
-    for i in range(0, len(initiative)):
-        if initiative[i] == "crit":
-            orderderedEntities.append(entities[i])
     return orderedEntities
 
 def combat():
