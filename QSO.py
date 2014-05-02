@@ -291,7 +291,49 @@ def combat():
         else:
             foeAtk()
             playerAtk()
+    while player.AP >= 100:
+        print("""What would you like to level up?
+1.  STR
+2.  DEX
+3.  MND
+4.  LCK
+5.  HP Die
+6.  Roll and add HP die to HP
+7.  Mana Die
+8.  Roll and add MP Die
+9.  Psychic Die
+10. Roll and add Psychic Die
+11. Upgrade damage die for current weapon""")
+    
+        while levelFlag == False
+        lvlIn = input("\n>").lower()
+        if lvlIn == 1 or lvlIn =="str":
+            player.levelUp(1)
+            lvlOut = "STR increased!"
+        elif lvlIn == 2 or lvlIn == "dex"
+            player.levelUp(2)
+            lvlOut = "DEX increased!"
+        elif lvlin == 3 or lvlIn == "mnd"
+            player.levelUp(3)
+            lvlOut = "MND increased!"
+        elif lvlIn == 4 or lvlIn == "lck"
+            if self.LCK >=5 or self.LCK <= -5:
+                player.levelUp(4)
+                lvlOut = "LCK increased!"
+            else:
+                print("You don't have access to the LCK stat!")
+                continue
+        elif lvlIn == 5 or lvlIn == "hp die":
+            player.levelUp(5)
+            lvlOut = "HP die increased!"
+        
+            
 
+        
+        player.level += 1
+        levelFlag = True
+        print("Player leveled up!")
+        print(lvlOut)
 
 def playerAtk():
     attackFlag = False
