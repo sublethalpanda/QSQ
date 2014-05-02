@@ -23,18 +23,18 @@ def _main():
     gameState = "Load"
     while not quit:
         doStuff(getInput())
+
 def getInput():
     global gameState
     options = [];
-    print(gameState)
     if(gameState == "Load"):
-        options.append("New Game")
-        options.append("Load Game")
+        options.append("new game")
+        options.append("load game")
     if gameState == "Running":
-        options.append("Fight")
+        options.append("fight")
     if gameState == "Combat":
         pass
-    options.append("Exit")
+    options.append("exit")
     stroptions = "("
     for i in range(0, len(options), 1):
         stroptions += options[i]
@@ -47,22 +47,23 @@ def getInput():
         if validateInput in options:
             valid = True;
     doStuff(validateInput)
-            
+
 def doStuff(input):
     global quit
-    if input == "New Game":
+    input = input.lower()
+    if input == "new game":
         charCreate(False)
-    if input == "Load Game":
+    if input == "load game":
         pass #attach the load function
-    if input == "Exit":
-        quit == True
-        
+    if input == "exit":
+        quit = True
+
 def main():
     newGame()
     while not update():
         print("doing something")
         return update()
-    
+
 def update():
     userIn = talk()
     #Check input here
@@ -72,6 +73,7 @@ def talk():
     return userIn
 
 #-----------------------------Character Creation
+
 def charCreate(loadingFlag):
     global gameState
     nameFlag = False
@@ -248,6 +250,12 @@ def createEnemy(level):
         levelSelect = randint(1,5)
         foe.levelUp(levelSelect)
 
+def _combat(entities[]):
+    orderedentities[]
+    for(len(entites)):
+
+
+
 def combat():
     global combatFlag
     combatFlag = False
@@ -357,6 +365,16 @@ def gameOver():
 
 #-----------------------------Character Class
 class Character(object):
+    name = ""
+    STR = 0
+    DEX = 0
+    MND = 0
+    LCK = 0
+    weapon = []
+    armor =
+    inventory = []
+    description = ""
+    age = 0
     def __init__(self,pName,pStr,pDex,pMnd,pLck,pWeapon, pArmor, pInventory, pHp, pLevel, pAp, pDescription, pAge, pMp, pPp, pManaEnabled):
         "An entity that can attack"
         self.name = pName
@@ -480,10 +498,35 @@ class Character(object):
         player.AP += apGain
         print ("The",foe.name,"dies, giving you",apGain,"AP")
 
+    def initiative(self):
+        roll = roll(self)
+        if type(roll) is str:
+            roll = roll + self.DEX
+        return roll
+class KVEntry:
+    _key = 0;
+    _value = 0;
+
+    @property
+    def key(self):
+        return self._key
+
+    @x.setter
+    def key(self, value):
+        if value >= 0:
+            _key = value
+
+    @property
+    def value(self):
+        return _value
+
+    def value(self, value):
+        _value = value
+
 ##############################################################################################
 #                                       Run
 ##############################################################################################
- 
+
 #if loadingFlag == False:
 #    charCreate(loadingFlag)
 #     loadingFlag = True
