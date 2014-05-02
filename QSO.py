@@ -55,9 +55,28 @@ def doStuff(input):
         charCreate(False)
     if input == "load game":
         pass #attach the load function
+<<<<<<< HEAD
     if input == "exit":
         quit = True
 
+=======
+    if input == "Exit":
+        quit == True
+
+def save():
+    if os.path.isfile("player.qso"):
+        os.remove("player.qso")
+    global player
+    pickle.dump(player, open( "player.qso","wb"))
+
+def load():
+    if os.path.isfile("player.qso"):
+        global player
+        player = pickle.load( open( "player.qso","rb"))
+        global loadingFlag
+        loadingFlag = True
+        
+>>>>>>> 46a415687cf6fe815777c3f74a51dd848c230de5
 def main():
     newGame()
     while not update():
