@@ -32,6 +32,7 @@ def getInput():
         options.append("load game")
     if gameState == "Running":
         options.append("fight")
+        options.append("save game")
     if gameState == "Combat":
         pass
     options.append("exit")
@@ -43,7 +44,7 @@ def getInput():
     stroptions += ")"
     valid = False
     while not valid:
-        validateInput = input("What would you like to do? " + str(stroptions))
+        validateInput = input("What would you like to do? " + str(stroptions) + "\n>")
         if validateInput in options:
             valid = True;
     doStuff(validateInput)
@@ -53,15 +54,12 @@ def doStuff(input):
     input = input.lower()
     if input == "new game":
         charCreate(False)
-    if input == "load game":
-        pass #attach the load function
-<<<<<<< HEAD
-    if input == "exit":
+    elif input == "load game":
+        load()
+    elif input == "save game":
+        save()
+    elif input == "exit":
         quit = True
-
-=======
-    if input == "Exit":
-        quit == True
 
 def save():
     if os.path.isfile("player.qso"):
@@ -75,8 +73,7 @@ def load():
         player = pickle.load( open( "player.qso","rb"))
         global loadingFlag
         loadingFlag = True
-        
->>>>>>> 46a415687cf6fe815777c3f74a51dd848c230de5
+
 def main():
     newGame()
     while not update():
@@ -270,10 +267,27 @@ def createEnemy(level):
         foe.levelUp(levelSelect)
 
 def _combat(entities[]):
-    orderedentities[]
-    for(len(entites)):
+    sEntities = sortEntities(entities)
+    for i in range(0, len(sEntities)):
+        sEntities[i].hitSomething(sEntities)
 
-
+def sortEntities(entities[]):
+    orderedEntities = []
+    orderedInitiative = []
+    initiative = []
+    neg = 0
+    for i in range(0, len(entites)):
+        initiative.append(entities[i].initiative())
+        if initiative[i] < neg:
+            initiative[i] = neg
+    for i in range(0, len(initiative)):
+        initiative[i] += neg
+    orderedInitiative = Sort(initiative)
+    for i in range(0, len(orderedInitiative)):
+        for j in range(0, len(initiative)):
+            if orderedInitiative[i] = initiative[j]:
+                orderedEntities.append(entities[j])
+                break
 
 def combat():
     global combatFlag
@@ -406,7 +420,6 @@ def foeAtk():
         healthCheck()
         attackFlag = True
 
-
 def healthCheck():
     if player.HP[0]<0:
         print(player.name,"has been slain!")
@@ -417,6 +430,57 @@ def healthCheck():
         global combatFlag
         combatFlag = True
         foe.die()
+
+def Sort(array):
+    return RadixSortAux(array, 1)
+def RadixSortAux(array, digit):
+    Empty = True
+    digits = [len(array)]
+    SortedArray = [len(array)]
+    for i in range(0, len(array)):
+        digits[i] = KVEntry()
+        digits[i].key(i)
+        digits[i].value((array[i]/digit) % 10)
+        if array[i] / digit != 0
+        Empty = False
+    if Empty:
+        return array
+
+    SortedDigits = CountingSort(digits)
+    for i in range(0, len(SortedArray)):
+        SortedArray[i] = array[SortedDigits[i].key()]
+    return RadixSortAux(SortedArray, digit * 10)
+
+def CountingSort(ArrayA):
+    ArrayB = [MaxValue(ArrayA) + 1]
+    ArrayC = [len(ArrayA)]
+
+    for i in range(0, len(ArrayB)):
+        ArrayB[i] = 0
+
+    for i in range(0, len(ArrayA)):
+        ArrayB[ArrayA[i].value()]++
+
+    for i in range(0, len(ArrayA)):
+        ArrayB[i] += ArrayB[i - 1]
+
+    for i in range(len(ArrayA)-1, -1, -1):
+        value = ArrayA[i].value()
+        index = ArrayB[value]
+        ArrayB[value]--
+        ArrayC[index-1] = KVEntry()
+        ArrayC[index-1].key(i)
+        ArrayC[index-1].value(value)
+
+    reutrn ArrayC
+
+def MaxValue(arr):
+    Max = arr[0].value()
+    for i in range(1, len(arr)):
+        if arr[i].value() > Max:
+            Max = arr[i].value()
+    return Max
+
 def gameOver():
     print("Game over!")
 
