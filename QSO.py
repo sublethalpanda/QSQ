@@ -104,11 +104,14 @@ def load():
 def _combat(entities):
     global gameState
     global player
+    for en in entities:
+        print("PC", isinstance(en, Player))
+        print("Gnoblin", isinstance(en, Gnoblin),type(en))
     sEntities = sortEntities(entities)
+    for en in sEntities:
+        print("PC", isinstance(en, Player))
+        print("Gnoblin", isinstance(en, Gnoblin),type(en))
     for i in range(0, len(sEntities)):
-        print("PC", isinstance(sEntities[i], Player))
-        print("PC", isinstance(player, Player))
-        print("Gnoblin", isinstance(sEntities[i], Gnoblin))
         sEntities[i].hitSomething(sEntities)
     
 def sortEntities(entities):
@@ -120,7 +123,7 @@ def sortEntities(entities):
         initiative.append(entities[i].initiative())
         try:
             if int(initiative[i]) < neg:
-                initiative[i] = neg
+                neg = initiative[i]
         except:
             pass
     for i in range(0, len(initiative)):
@@ -130,6 +133,7 @@ def sortEntities(entities):
         for j in range(0, len(initiative)):
             if orderedInitiative[i] == initiative[j]:
                 orderedEntities.append(entities[j])
+                del entities[j]
                 break
     return orderedEntities
 

@@ -146,7 +146,7 @@ class Player(Character):
         gameState = "Running"
 
     def hitSomething(self, entities):
-        entities.remove(self)
+#         entities.remove(self)
         word = "are"
         if len(entities) == 1:
             word = "is"

@@ -185,7 +185,7 @@ class Character(object):
         return tempRoll
 
     def dead(self):
-        return HP < 0
+        return self.HP[0] < 0
 
     def die(self, killer):
         apGain = int(self.AP/killer.level)
@@ -217,7 +217,8 @@ class Character(object):
             target.die(self)
 
     def damage(self, pdamage):
-        self.HP -= pdamage
+#         print(self.HP, "      ", pdamage)
+        self.HP[0] -= pdamage
 
     def hitSomething(self, target):
         print("super call")
