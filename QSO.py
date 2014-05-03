@@ -19,22 +19,22 @@ import os
 
 #Flag if a char has already been created
 loadingFlag = False
-quit = False
+quitGame = False
 
 ##############################################################################################
 #                                       Functions
 ##############################################################################################
 def _main():
     global gameState
-    global quit
+    global quitGame
     gameState = "Load"
-    while not quit:
+    while not quitGame:
         getInput()
 
 def getInput():
     global gameState
     global player
-    global quit
+    global quitGame
     options = [];
     if(gameState == "Load"):
         options.append(Selection("New Game", ["new", "new game"], "create()"))
@@ -45,7 +45,7 @@ def getInput():
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
     if gameState == "Combat":
         pass
-    options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
+    options.append(Selection("Exit Game", ["exit", "exit game"], "quitGameGame()"))
     stroptions = "("
     for i in range(0, len(options), 1):
         stroptions += str(options[i])
@@ -63,9 +63,9 @@ def getInput():
                 break
     exec(sel.codeToExecute)
 
-def quitGame():
-    global quit
-    quit = True
+def quitGameGame():
+    global quitGame
+    quitGame = True
 
 def testLevel():
         player.AP = 100
@@ -113,7 +113,7 @@ def _combat(entities):
         print("Gnoblin", isinstance(en, Gnoblin),type(en))
     for i in range(0, len(sEntities)):
         sEntities[i].hitSomething(sEntities)
-    
+
 def sortEntities(entities):
     orderedEntities = []
     orderedInitiative = []
@@ -136,108 +136,6 @@ def sortEntities(entities):
                 del entities[j]
                 break
     return orderedEntities
-
-def combat():
-    global combatFlag
-    combatFlag = False
-    while combatFlag == False:
-        if player.DEX>foe.DEX:
-            priority = 0
-        elif player.DEX<foe.DEX:
-            priority = 1
-        else:
-            priority = randint(0,1)
-        if priority == 0:
-            playerAtk()
-            foeAtk()
-        else:
-            foeAtk()
-            playerAtk()
-    player.checkLevel()
-
-def playerAtk():
-    attackFlag = False
-    while attackFlag == False:
-        pHit, pDamage = player.attack()
-        eDefend = foe.defend()
-        selfDamage = 0
-        try:
-            pHit == int(pHit)
-            eDefend == int(eDefend)
-            if pHit < eDefend:
-                pDamage = 0
-        except:
-            if pHit == "crit":
-                if eDefend == "crit":
-                    continue
-                else:
-                    pDamage = pDamage*2
-            elif pHit == "fumble":
-                selfDamage = randint(1,int(pDamage*2/3)+1)
-                print(player.name,"fumbles, dealing",selfDamage,"to themselves!")
-                pDamage = 0
-        if eDefend == "fumble":
-            pDamage=pDamage*2
-        if pHit == "crit":
-            print(player.name,"crits, dealing",pDamage,"to the",foe.name)
-        elif pHit == "fumble":
-            player.HP[0] = player.HP[0]-selfDamage
-        elif pDamage == 0:
-            print(player.name,"missed!")
-        else:
-            print(player.name,"hits, dealing",pDamage,"to the",foe.name)
-        foe.HP[0] -= pDamage
-        healthCheck()
-        attackFlag = True
-
-def foeAtk():
-    attackFlag = False
-    while attackFlag == False:
-        eHit, eDamage = foe.attack()
-        pDefend = player.defend()
-        selfDamage = 0
-        try:
-            eHit = int(eHit)
-            pDefend = int(pDefend)
-            if eHit < pDefend:
-                eDamage = 0
-        except:
-            if eHit == "crit":
-                if pDefend == "crit":
-                    continue
-                else:
-                    eDamage = eDamage*2
-            elif eHit == "fumble":
-                selfDamage = randint(1,int(eDamage*2/3)+1)
-                print(foe.name,"fumbles, dealing",selfDamage,"to themself!")
-                eDamage = 0
-        if pDefend == "fumble":
-            eDamage=eDamage*2
-        if eHit == "crit":
-            print("The",foe.name,"hits, dealing",eDamage,"to",player.name)
-        elif eHit == "fumble":
-            foe.HP[0] = foe.HP[0]-selfDamage
-        elif eDamage == 0:
-            print(foe.name,"missed!")
-        else:
-            print(foe.name,"hits, dealing",eDamage,"to the",player.name)
-        player.HP[0] -= eDamage
-        healthCheck()
-        attackFlag = True
-
-def healthCheck():
-    if player.HP[0]<0:
-        print(player.name," has been slain!")
-        global combatFlag
-        combatFlag = True
-        gameOver()
-    elif foe.HP[0]<0:
-        global combatFlag
-        combatFlag = True
-        foe.die()
-
-def gameOver():
-    print("Game over!")
 
 ##############################################################################################
 #                                       Run
