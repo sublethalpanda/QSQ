@@ -8,6 +8,7 @@ from Radix import KVEntry
 from Radix import Sort
 from PC import Player
 from Gnoblin import Gnoblin
+from Selection import Selection
 import sys
 import pickle
 import os
@@ -35,26 +36,28 @@ def getInput():
     global player
     options = [];
     if(gameState == "Load"):
-        options.append("new")
-        options.append("load")
+        options.append(Selection("New Game", ["new", "new game"], "create()"))
+        options.append(Selection("Load Game", ["load", "load game"], "load()"))
     if gameState == "Running":
-        options.append("fight")
-        options.append("level")
-        options.append("save game")
+        options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
+        options.append(Selection("Level Up", ["level", "level up"], "player.checkLevel()"))
+        options.append(Selection("Save Game", ["save", "save game"], "save()"))
     if gameState == "Combat":
         pass
-    options.append("exit")
+    options.append(Selection("Exit Game", ["exit", "exit game"], "quit = True"))
     stroptions = "("
     for i in range(0, len(options), 1):
-        stroptions += options[i]
+        stroptions += str(options[i])
         if i < len(options)-1:
             stroptions += ", "
     stroptions += ")"
     valid = False
     while not valid:
         validateInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
-        if validateInput in options:
-            valid = True;
+        for sel in options:
+            if sel.validSel(validateInput):
+                valid = True
+                break
     doStuff(validateInput)
 
 def doStuff(usrin):
@@ -71,12 +74,15 @@ def doStuff(usrin):
         player.AP = 100
         player.checkLevel()
     elif usrin == "fight":
-        entities = []
-        entities.append(player)
-        entities.append(Gnoblin(1))
-        _combat(entities)
+        testCombat()
     elif usrin == "exit":
         quit = True
+
+def testCombat():
+    entities = []
+    entities.append(player)
+    entities.append(Gnoblin(1))
+    _combat(entities)
 
 def create():
     global player
@@ -120,7 +126,7 @@ def _combat(entities):
     sEntities = sortEntities(entities)
     #for i in range(0, len(sEntities)):
         #sEntities[i].hitSomething(sEntities)
-
+        pass
 
 def sortEntities(entities):
     orderedEntities = []
@@ -234,7 +240,7 @@ def foeAtk():
 
 def healthCheck():
     if player.HP[0]<0:
-        print(player.name,"has been slain!")
+        print(player.name," has been slain!")
         global combatFlag
         combatFlag = True
         gameOver()
