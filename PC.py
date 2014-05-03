@@ -144,3 +144,30 @@ class Player(Character):
         Character.__init__(self, name,STR,DEX,MND,LCK,weapon, armor, inventory, hp, level, ap, description, age, mp, pp, manaEnabled)
         print("A hero has risen!")
         gameState = "Running"
+
+    def hitSomething(self, entities):
+        entities.remove(self)
+        word = "are"
+        if len(entities) == 1:
+            word = "is"
+        print("There", word, len(entities), "enemies;", end="")
+        for enemy in entities:
+            print("a level", enemy.level, enemy.name, end="")
+        usrIn = input("\n What would you like to do? (Attack, Run Away)\n>").lower()
+        if("run" in usrIn):
+            return False
+        elif("attack" in usrIn):
+            validTarget = False
+            selection = -1
+            while not validTarget:
+                print("Who would you like to attack?")
+                for i in range(0, len(entities)):
+                    print(i, "A level", entities[i].level, entities[i].name)
+                usrIn = input(">")
+                try:
+                    selection = int(usrIn)
+                    validTarget = True
+                except:
+                    pass
+
+            self.attack(entities[i])

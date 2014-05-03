@@ -145,7 +145,7 @@ class Character(object):
             self.weapon[3] += 4
             self.weapon[4] += 1
 
-    def attack(self):
+    def rolltoAttack(self):
         if self.BAS == "STR":
             tempBonus = self.STR
         elif self.BAS == "DEX":
@@ -160,9 +160,9 @@ class Character(object):
             tempRoll += tempBonus + self.weapon[4]
 
         tempDamage = randint(1,self.weapon[3])+tempBonus
-        return tempRoll,tempDamage
+        return {'toHit':tempRoll,'damage':tempDamage}
 
-    def defend(self):
+    def rolltoDefend(self):
         if self.BDS == "STR":
             tempBonus = self.STR
         elif self.BDS == "DEX":
@@ -179,15 +179,18 @@ class Character(object):
     def roll(self):
         tempRoll = randint(1,20)
         if tempRoll == 1:
-            tempRoll = -sys.maxsize -1
+            tempRoll = -sys.maxsize-1
         elif tempRoll == 20:
             tempRoll = sys.maxsize
         return tempRoll
 
-    def die(self):
-        apGain = int(foe.AP/player.level)
-        player.AP += apGain
-        print ("The",foe.name,"dies, giving you",apGain,"AP")
+    def dead(self):
+        return HP < 0
+
+    def die(self, killer):
+        apGain = int(self.AP/killer.level)
+        killer.AP += apGain
+        print ("The",self.name,"dies, giving",killer.name,apGain,"AP")
 
     def initiative(self):
         roll = self.roll()
@@ -197,7 +200,24 @@ class Character(object):
             pass
         return roll
 
-    def hitSomethign(self, entities):
-        target = None
-        while not target == self:
-            target = entities[randint(0, len(entities))]
+    def attack(self, target):
+        atRoll = self.rolltoAttack()
+        defRoll = target.rolltoDefend()
+        pdamage = 0
+        if(atRoll['toHit'] > defRoll):
+            pdamage = atRoll['damage']
+            #RR and RT
+        if(atRoll['toHit'] > sys.maxsize / 2):
+            target = self
+        elif(atRoll['toHit'] < (-sys.maxsize-1) / 2):
+            pdamage *= 2
+        target.damage(pdamage)
+        print(self.name, "Hits", target.name, "for", pdamage, "damage")
+        if target.dead():
+            target.die(self)
+
+    def damage(self, pdamage):
+        self.HP -= pdamage
+
+    def hitSomething(self, target):
+        print("super call")

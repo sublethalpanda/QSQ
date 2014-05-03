@@ -55,8 +55,9 @@ def getInput():
     valid = False
     selection = None
     while not valid:
+        valInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
         for sel in options:
-            if sel.validSel(input("What would you like to do? " + str(stroptions) + "\n>").lower()):
+            if sel.validSel(valInput):
                 valid = True
                 selection = sel
                 break
@@ -71,6 +72,7 @@ def testLevel():
         player.checkLevel()
 
 def testCombat():
+    global player
     entities = []
     entities.append(player)
     entities.append(Gnoblin(1))
@@ -78,8 +80,9 @@ def testCombat():
 
 def create():
     global player
+    global gameState
     player = Player()
-
+    gameState = "Running"
 
 def save():
     if os.path.isfile("player.qso"):
@@ -98,28 +101,16 @@ def load():
     else:
         print("Player not found")
 
-def main():
-    newGame()
-    while not update():
-        print("doing something")
-        return update()
-
-def update():
-    userIn = talk()
-    #Check input here
-
-def talk():
-    userIn = input("\n>").lower()
-    return userIn
-
 def _combat(entities):
     global gameState
-    gameState = "Combat"
+    global player
     sEntities = sortEntities(entities)
     for i in range(0, len(sEntities)):
-        #sEntities[i].hitSomething(sEntities)
-        pass
-
+        print("PC", isinstance(sEntities[i], Player))
+        print("PC", isinstance(player, Player))
+        print("Gnoblin", isinstance(sEntities[i], Gnoblin))
+        sEntities[i].hitSomething(sEntities)
+    
 def sortEntities(entities):
     orderedEntities = []
     orderedInitiative = []

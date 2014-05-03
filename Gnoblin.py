@@ -10,6 +10,7 @@ class Gnoblin(Character):
             self.createEnemy(level)
         else:
             Character.__init__(self, pName, pStr, pDex, pMnd, pLck, pWeapon, pArmor, pInventory, pHp, pLevel, pAp, pDescription, pAge, pMp, pPp, pManaEnabled)
+
     def createEnemy(self, level):
         name = "Gnoblin"
         statsFlag = False
@@ -47,3 +48,11 @@ class Gnoblin(Character):
         for i in range(level):
             levelSelect = randint(1,5)
             self.levelUp(levelSelect)
+
+    def hitSomething(self, entities, allies = None):
+        if not allies == None:
+            for entity in allies:
+                entities.remove(allies)
+        entities.remove(self)
+        target = entities[randint(0, len(entities))]
+        self.attack(target)
