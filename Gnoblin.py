@@ -50,9 +50,9 @@ class Gnoblin(Character):
             self.levelUp(levelSelect)
 
     def hitSomething(self, entities, allies = None):
-        if not allies == None:
-            for entity in allies:
-                entities.remove(allies)
-        entities.remove(self)
+#         if not allies == None:
+#             for entity in allies:
+#                 entities.remove(allies)
+#         entities.remove(self)
         target = entities[randint(0, len(entities))]
         self.attack(target)
