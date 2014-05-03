@@ -148,11 +148,13 @@ class Player(Character):
     def hitSomething(self, entities):
 #         entities.remove(self)
         word = "are"
+        ending = "ies"
         if len(entities) == 1:
             word = "is"
-        print("There", word, len(entities), "enemies;", end="")
+            ending = "y"
+        print("There", word, len(entities), "enem" + ending + ";", end=" ")
         for enemy in entities:
-            print("a level", enemy.level, enemy.name, end="")
+            print("a level", enemy.level, enemy.name, end=" ")
         usrIn = input("\n What would you like to do? (Attack, Run Away)\n>").lower()
         if("run" in usrIn):
             return False

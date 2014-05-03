@@ -14,6 +14,3 @@ class Selection():
 
     def validSel(self, txt):
         return txt in self.vSelections
-
-    def select(self):
-        pass
