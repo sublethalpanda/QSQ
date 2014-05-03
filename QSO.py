@@ -29,22 +29,23 @@ def _main():
     global quit
     gameState = "Load"
     while not quit:
-        doStuff(getInput())
+        getInput()
 
 def getInput():
     global gameState
     global player
+    global quit
     options = [];
     if(gameState == "Load"):
         options.append(Selection("New Game", ["new", "new game"], "create()"))
         options.append(Selection("Load Game", ["load", "load game"], "load()"))
     if gameState == "Running":
         options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
-        options.append(Selection("Level Up", ["level", "level up"], "player.checkLevel()"))
+        options.append(Selection("Level Up", ["level", "level up"], "testLevel()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
     if gameState == "Combat":
         pass
-    options.append(Selection("Exit Game", ["exit", "exit game"], "quit = True"))
+    options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
     stroptions = "("
     for i in range(0, len(options), 1):
         stroptions += str(options[i])
@@ -52,31 +53,22 @@ def getInput():
             stroptions += ", "
     stroptions += ")"
     valid = False
+    selection = None
     while not valid:
-        validateInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
         for sel in options:
-            if sel.validSel(validateInput):
+            if sel.validSel(input("What would you like to do? " + str(stroptions) + "\n>").lower()):
                 valid = True
+                selection = sel
                 break
-    doStuff(validateInput)
+    exec(sel.codeToExecute)
 
-def doStuff(usrin):
+def quitGame():
     global quit
-    while usrin == None:
-        usrin = getInput()
-    if "new" in usrin:
-        create()
-    elif "load" in usrin:
-        load()
-    elif "save" in usrin:
-        save()
-    elif usrin == "level":
+    quit = True
+
+def testLevel():
         player.AP = 100
         player.checkLevel()
-    elif usrin == "fight":
-        testCombat()
-    elif usrin == "exit":
-        quit = True
 
 def testCombat():
     entities = []
@@ -124,7 +116,7 @@ def _combat(entities):
     global gameState
     gameState = "Combat"
     sEntities = sortEntities(entities)
-    #for i in range(0, len(sEntities)):
+    for i in range(0, len(sEntities)):
         #sEntities[i].hitSomething(sEntities)
         pass
 

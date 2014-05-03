@@ -77,7 +77,7 @@ class Character(object):
         return disp
 
     def checkLevel(self):
-        while player.AP >= 100:
+        while self.AP >= 100:
             self.doLevel()
 
     def doLevel(self):
