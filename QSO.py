@@ -118,7 +118,7 @@ def _combat(entities):
     global gameState
     gameState = "Combat"
     sEntities = sortEntities(entities)
-    for i in range(0, len(sEntities)):
+    #for i in range(0, len(sEntities)):
         #sEntities[i].hitSomething(sEntities)
 
 
