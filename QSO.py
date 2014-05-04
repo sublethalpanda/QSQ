@@ -136,17 +136,4 @@ def sortEntities(entities):
                 del entities[j]
                 break
     return orderedEntities
-
-##############################################################################################
-#                                       Run
-##############################################################################################
-
-#if loadingFlag == False:
-#    charCreate(loadingFlag)
-#     loadingFlag = True
-#     player.summary()
-#     createEnemy(player.level)
-#     foe.summary()
-#     player.HP[0] = 9001
-#     combat()
 _main()
