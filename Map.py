@@ -60,6 +60,7 @@ def checkDirect(userIn):
         print("You can't go that way!")
 
 flag = False
+print("Pick a direction. type 'exit' to leave.")
 while flag == False:
     main()
 
