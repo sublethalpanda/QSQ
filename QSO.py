@@ -1,3 +1,11 @@
+#Current bugs
+#Selecting '1' for attacking a gnoblin results in target out of range.
+#Selecting '0' results in attacking foe, not self.
+#Not sure how the level up selection works, but I'm getting an out-of-index when attempting anything above or equal to 6.
+#I can increase LCK without knowing it- meant to be mutable ONLY IF known.
+#I'll bet I can increase MP as well, needs to depend on whether manaEnabled == True.
+
+
 ##############################################################################################
 #                                       Import
 ##############################################################################################

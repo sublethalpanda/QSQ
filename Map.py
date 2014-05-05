@@ -1,14 +1,44 @@
-global x
-global y
+pos = [1,2]
 
 #Test Input
 userIn = input("\n>").lower()
 userIn = userIn[0:1]
+def room(x,y):
+    pos = [x,y]
+    if pos == [1,2]:
+        print("entrance room")
+    else:
+        return False
+    return True
+def roomDesc(x,y):
+    pass
 
-# def mapDesc(x,y):
-#
-# def mapMove(x,y):
 
+blockFlag = False
+if userIn == "n":
+    if room(pos[0],pos[1]+1):
+        print("Moving north")
+    else:
+        blockFlag = True
+elif userIn =="s":
+    if room(pos[0],pos[1]-1):
+        print("Moving south")
+    else:
+        blockFlag = True
+elif userIn =="e":
+    if room(pos[0]+1,pos[1]):
+        print("Moving east")
+    else:
+        blockFlag = True
+elif userIn =="w":
+    if room(pos[0]-1,pos[1]):
+        print("Moving west")
+    else:
+        blockFlag = True
+else:
+    print("That is not a direction!")
+if blockFlag == True:
+    print("You can't go that way!")
 
 
 
