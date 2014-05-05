@@ -19,6 +19,7 @@ from Selection import Selection
 import sys
 import pickle
 import os
+from Map import main
 
 ##############################################################################################
 #                                       Variables

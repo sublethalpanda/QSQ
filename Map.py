@@ -1,46 +1,67 @@
 pos = [1,2]
 
 #Test Input
-userIn = input("\n>").lower()
-userIn = userIn[0:1]
+
+def main():
+    global flag
+    userIn = input("\n>").lower()
+    if userIn == "exit":
+        print("closing...")
+        flag = True
+    userIn = userIn[0:1]
+    checkDirect(userIn)
+    room(pos[0],pos[1])
 def room(x,y):
     pos = [x,y]
     if pos == [1,2]:
         print("entrance room")
+    elif pos == [1,3]:
+        print("north of entrance")
+    elif pos == [2,2]:
+        print("east of entrance")
+    elif pos == [0,2]:
+        print("west of entrance")
     else:
         return False
     return True
 def roomDesc(x,y):
     pass
 
+def checkDirect(userIn):
+    global pos
+    blockFlag = False
+    if userIn == "n":
+        if room(pos[0],pos[1]+1):
+            print("Moving north")
+            pos[1] += 1
+        else:
+            blockFlag = True
+    elif userIn =="s":
+        if room(pos[0],pos[1]-1):
+            print("Moving south")
+            pos[1] -= 1
+        else:
+            blockFlag = True
+    elif userIn =="e":
+        if room(pos[0]+1,pos[1]):
+            print("Moving east")
+            pos[0] += 1
+        else:
+            blockFlag = True
+    elif userIn =="w":
+        if room(pos[0]-1,pos[1]):
+            print("Moving west")
+            pos[0] -= 1
+        else:
+            blockFlag = True
+    else:
+        print("That is not a direction!")
+    if blockFlag == True:
+        print("You can't go that way!")
 
-blockFlag = False
-if userIn == "n":
-    if room(pos[0],pos[1]+1):
-        print("Moving north")
-    else:
-        blockFlag = True
-elif userIn =="s":
-    if room(pos[0],pos[1]-1):
-        print("Moving south")
-    else:
-        blockFlag = True
-elif userIn =="e":
-    if room(pos[0]+1,pos[1]):
-        print("Moving east")
-    else:
-        blockFlag = True
-elif userIn =="w":
-    if room(pos[0]-1,pos[1]):
-        print("Moving west")
-    else:
-        blockFlag = True
-else:
-    print("That is not a direction!")
-if blockFlag == True:
-    print("You can't go that way!")
-
-
+flag = False
+while flag == False:
+    main()
 
 
 
