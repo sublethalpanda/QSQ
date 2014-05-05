@@ -85,19 +85,23 @@ def create():
     gameState = "Running"
 
 def save():
+    print("Saving...")
     if os.path.isfile("player.qso"):
         os.remove("player.qso")
     global player
     pickle.dump(player, open( "player.qso","wb"))
+    print("Save complete!")
 
 def load():
     global gameState
+    print("Loading")
     if os.path.isfile("player.qso"):
         global player
         player = pickle.load( open( "player.qso","rb"))
         global loadingFlag
         loadingFlag = True
         gameState = "Running"
+        print(player.name,"loaded successfully.")
     else:
         print("Player not found")
 
