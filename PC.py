@@ -178,30 +178,6 @@ class Player(Character):
             else:
                 selection = 0
             self.attack(entities[selection])
-    def __str__(self):
-        summary = ""
-        summary = self.name + "\tLevel " + str(self.level)
-        summary += "\n"
-        summary += str(self.age[0])
-        summary += "\n"
-        summary += "HP: "+str(self.HP[0])+"/"+str(self.HP[1])
-        summary += "\n"
-        summary += "STR: "+str(self.STR)
-        summary += "\n"
-        summary += "DEX: "+str(self.DEX)
-        summary += "\n"
-        summary += "MND: "+str(self.MND)
-        if self.LCK >= 5 or self.LCK <= -5:
-            summary += "\n"
-            summary += "LCK: "+str(self.LCK)
-        if self.manaEnabled == True:
-            summary += "\n"
-            summary += "MP: "+str(self.MP[0])+"/"+str(self.MP[1])
-            summary += "\n"
-            summary += "PP: "+str(self.PP[0])+"/"+str(self.PP[1])
-        summary += "\n"
-        summary += self.description
-        return summary
     def rest(self):
         self.HP[0] = self.HP[1]
         if self.manaEnabled == True:

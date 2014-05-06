@@ -51,30 +51,29 @@ class Character(object):
 
 
     def __str__(self):
-        disp = ""
-        #Name and title
-        disp += "\t\t"+self.name,"Level",self.level,"\n\t   Character Summary","\n\t\t Age:",self.age[0]
-        #Health
-        disp +="\n"
-        disp += "\tHP:",str(self.HP[0])+"/"+str(self.HP[1])
-        #Stats
-        disp += "\n"
-        disp += "\tSTR:",self.STR,"\n\tDEX:",self.DEX,"\n\tMND",self.MND
-        if self.LCK>=5 or self.LCK <=-5:
-            disp += "\n"
-            disp += "\tLCK:",self.LCK
-        #Magic and Psychic
+        summary = ""
+        summary = self.name + "\tLevel " + str(self.level)
+        summary += "\n"
+        summary += str(self.age[0])
+        summary += "\n"
+        summary += "HP: "+str(self.HP[0])+"/"+str(self.HP[1])
+        summary += "\n"
+        summary += "STR: "+str(self.STR)
+        summary += "\n"
+        summary += "DEX: "+str(self.DEX)
+        summary += "\n"
+        summary += "MND: "+str(self.MND)
+        if self.LCK >= 5 or self.LCK <= -5:
+            summary += "\n"
+            summary += "LCK: "+str(self.LCK)
         if self.manaEnabled == True:
-            disp += "\n"
-            disp += "MP:",str(self.MP[0])+"/"+str(self.MP[1])
-            disp += "\n"
-            disp += "PP:",str(self.PP[0])+"/"+str(self.PP[1])
-        #Weapon and armor
-        disp += "\n"
-        disp += "Equipped Weapon:",self.weapon[2],"\nEquipped Armor:",self.armor[1]
-        disp += "\n"
-        disp += '"'+self.description+'"'
-        return disp
+            summary += "\n"
+            summary += "MP: "+str(self.MP[0])+"/"+str(self.MP[1])
+            summary += "\n"
+            summary += "PP: "+str(self.PP[0])+"/"+str(self.PP[1])
+        summary += "\n"
+        summary += self.description
+        return summary
 
     def checkLevel(self):
         while self.AP >= 100:
