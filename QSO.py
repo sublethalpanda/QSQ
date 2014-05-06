@@ -41,7 +41,7 @@ def getInput():
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
-        options.append(Selection("Display Character",["display","display character"], "player.summary()"))
+        options.append(Selection("Display Character",["display","display character"], "print(player)"))
     if gameState == "Combat":
         pass
     options.append(Selection("Exit Game", ["exit", "exit game"], "quitGameGame()"))

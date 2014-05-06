@@ -178,19 +178,30 @@ class Player(Character):
             else:
                 selection = 0
             self.attack(entities[selection])
-    def summary(self):
-        print(self.name,"\tLevel",self.level)
-        print(self.age[0])
-        print("HP:",str(self.HP[0])+"/"+str(self.HP[1]))
-        print("STR:",self.STR)
-        print("DEX:",self.DEX)
-        print("MND:",self.MND)
+    def __str__(self):
+        summary = ""
+        summary = self.name + "\tLevel " + str(self.level)
+        summary += "\n"
+        summary += str(self.age[0])
+        summary += "\n"
+        summary += "HP: "+str(self.HP[0])+"/"+str(self.HP[1])
+        summary += "\n"
+        summary += "STR: "+str(self.STR)
+        summary += "\n"
+        summary += "DEX: "+str(self.DEX)
+        summary += "\n"
+        summary += "MND: "+str(self.MND)
         if self.LCK >= 5 or self.LCK <= -5:
-            print("LCK:",self.LCK)
+            summary += "\n"
+            summary += "LCK: "+str(self.LCK)
         if self.manaEnabled == True:
-            print("MP:",str(self.MP[0])+"/"+str(self.MP[1]))
-            print("PP:",str(self.PP[0])+"/"+str(self.PP[1]))
-        print (self.description)
+            summary += "\n"
+            summary += "MP: "+str(self.MP[0])+"/"+str(self.MP[1])
+            summary += "\n"
+            summary += "PP: "+str(self.PP[0])+"/"+str(self.PP[1])
+        summary += "\n"
+        summary += self.description
+        return summary
     def rest(self):
         self.HP[0] = self.HP[1]
         if self.manaEnabled == True:
