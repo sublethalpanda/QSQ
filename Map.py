@@ -175,7 +175,7 @@ def checkDirect(userIn):
     else:
         if randint(1,3) == 1:
             print("Initiate combat here plz.")
-            combat[Globals.player, Gnoblin(max(1, randint(Globals.player.level - 5, Globals.player.level + 5)))]
+            combat([Globals.player, Gnoblin(max(1, randint(Globals.player.level - 5, Globals.player.level + 5)))])
 
 
 

@@ -1,9 +1,11 @@
+import Globals
+
 def combat(entities):
     sEntities = sortEntities(entities)
     combat = True
     while combat:
         for i in range(0, len(sEntities)):
-            sEntities[i].hitSomething(sEntities[:])
+            combat = sEntities[i].hitSomething(sEntities[:])
         for en in sEntities:
             if en.dead():
                 sEntities.remove(en)

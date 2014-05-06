@@ -82,7 +82,8 @@ class Prefix(Affix):
     Shieldless = 11
     Obama = 12
     HulkBeef = 13
-    Sightless = 14
+    Sightless = -7
+    Aggressive = 14
     ManHater = 15
     LadyLicker = 16
     PizzaPicker = 17
