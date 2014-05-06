@@ -42,7 +42,7 @@ def getInput():
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if Map.positionCheck() == [0,4]:
             if "key" not in player.inventory:
-                options.append(Selection("Get Key",["get","get key"],"player.inventory[0] = ['item','key']"))
+                options.append(Selection("Get Key",["get","get key"],"getKey()"))
         elif Map.positionCheck() == [4,5]:
             if doorUnlocked == False:
                 if "key" in player.inventory:
@@ -155,6 +155,8 @@ def sortEntities(entities):
                 orderedEntities.append(entities[j])
                 break
     return orderedEntities
+def getKey():
+    player.inventory.append(["item","key"])
 for i in range(15):
     print(Gnoblin(i))
 _main()
