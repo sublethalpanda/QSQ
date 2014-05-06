@@ -147,4 +147,6 @@ def sortEntities(entities):
                 orderedEntities.append(entities[j])
                 break
     return orderedEntities
+for i in range(15):
+    print(Gnoblin(i))
 _main()

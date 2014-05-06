@@ -58,7 +58,10 @@ class Suffix(Affix):
     Troll = 4
     WhoMustNotBeNamed = 40
     Oakenshield = 14
-
+    Drunk = -3
+    Fart = -15
+    Face = -12
+    Arm = -29
 
 @unique
 class Prefix(Affix):
@@ -92,7 +95,7 @@ class Prefix(Affix):
     Pegaus = 100
     Budski= 150
     Skinner = 111
-    Angushied = 2
+    Angushied = -4
     armless = -50
     legless = -60
     headless = -100
@@ -118,7 +121,7 @@ def get(level):
     prefix = None
     suffix = None
     while not valid:
-        prefix = Prefix.getSizeFor(level);
+        prefix = Prefix.getRandom(Suffix.getMin().value + level, Suffix.getMax().value - level)
         try:
             suffix = Suffix(level-prefix.value)
             if prefix.value + suffix.value == level:
