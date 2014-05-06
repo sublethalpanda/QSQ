@@ -108,7 +108,7 @@ class Prefix(Affix):
     smallest = -3
     BatmanCosplay = -58
     FireLord = 15000
-    CreppyLittleChild = -1000
+    CreppyLittleChild = -1001
     DonkeyKong = 51
     CheesyJokes = -17
     Riddler = -90

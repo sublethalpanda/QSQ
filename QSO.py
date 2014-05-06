@@ -6,6 +6,7 @@ from Character import Character
 from PC import Player
 from Gnoblin import Gnoblin
 from Selection import Selection
+import Globals
 import sys
 import pickle
 import os
@@ -15,34 +16,28 @@ import Map
 ##############################################################################################
 
 #Flag if a char has already been created
-loadingFlag = False
-quitGame = False
 
 ##############################################################################################
 #                                       Functions
 ##############################################################################################
 def _main():
-    global gameState
-    global quitGame
-    gameState = "Load"
-    while not quitGame:
+    Globals.gameState = "Load"
+    while not Globals.quitGame:
         getInput()
 
 def getInput():
-    global gameState
     global player
-    global quitGame
     options = [];
-    if(gameState == "Load"):
+    if(Globals.gameState == "Load"):
         options.append(Selection("New Game", ["new", "new game"], "create()"))
         options.append(Selection("Load Game", ["load", "load game"], "load()"))
-    if gameState == "Running":
+    if Globals.gameState == "Running":
         options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
-    if gameState == "Dungeon":
+    if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
@@ -50,9 +45,9 @@ def getInput():
         if Map.positionCheck() == [2,4]:
             options.append(Selection("Rest",["rest"],"player.rest()"))
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
-    if gameState == "Combat":
+    if Globals.gameState == "Combat":
         pass
-    options.append(Selection("Exit Game", ["exit", "exit game"], "quitGameGame()"))
+    options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
     stroptions = "("
     for i in range(0, len(options), 1):
         stroptions += str(options[i])
@@ -70,12 +65,11 @@ def getInput():
                 break
     exec(sel.codeToExecute)
 
-def quitGameGame():
-    global quitGame
+def quitGame():
     userIn = input("Would you like to save first?").lower()
     if "y" in userIn:
         save()
-    quitGame = True
+    Globals.quitGame = True
 
 def level():
     player.checkLevel()
@@ -89,9 +83,8 @@ def testCombat():
 
 def create():
     global player
-    global gameState
     player = Player()
-    gameState = "Dungeon"
+    Globals.gameState = "Dungeon"
     a,b = Map.positionCheck()
     Map.roomDesc(a,b)
 
@@ -104,14 +97,13 @@ def save():
     print("Save complete!")
 
 def load():
-    global gameState
     print("Loading")
     if os.path.isfile("player.qso"):
         global player
         player = pickle.load( open( "player.qso","rb"))
         global loadingFlag
         loadingFlag = True
-        gameState = "Dungeon"
+        Globals.gameState = "Dungeon"
         print(player.name,"loaded successfully.")
         a,b = Map.positionCheck()
         Map.roomDesc(a,b)
@@ -119,9 +111,7 @@ def load():
         print("Player not found")
 
 def _combat(entities):
-    global gameState
     global player
-    global quitGame
     sEntities = sortEntities(entities)
     combat = True
     while combat:
@@ -134,7 +124,7 @@ def _combat(entities):
             combat = False
     if player.dead():
         print("You have been slain!")
-        quitGame = True
+        Globals.quitGame = True
 
 def sortEntities(entities):
     orderedEntities = []

@@ -1,4 +1,5 @@
 from random import randint
+import Globals
 position = [2,1]
 mapQuitFlag = False
 initFlag = False
@@ -22,6 +23,7 @@ def room(x,y,direc):
     if position == [2,0]:
         #Exit
         print("You exit the cave")
+        Globals.gameState = "Running"
         flag = True
         return True
     elif position == [2,1]:
