@@ -37,16 +37,11 @@ def getInput():
     if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if Map.positionCheck() == [0,4]:
-<<<<<<< HEAD
-            if "key" not in player.inventory:
+            if "key" not in Globals.player.inventory:
                 options.append(Selection("Get Key",["get","get key"],"getKey()"))
-=======
-            if player.inventory[0] == "key":
-                options.append(Selection("Get Key",["get","get key"],"player.inventory.append['key']"))
->>>>>>> e2831edd69abbd93efd4799e8250ab527da97696
         elif Map.positionCheck() == [4,5]:
             if Globals.doorUnlocked == False:
-                if player.inventory[0] == "key":
+                if Globals.player.inventory[0] == "key":
                     options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
         if Map.positionCheck() == [2,4]:
             options.append(Selection("Rest",["rest"],"Globals.player.rest()"))
@@ -115,49 +110,8 @@ def load():
         Map.roomDesc(a,b)
     else:
         print("Player not found")
-<<<<<<< HEAD
-
-def _combat(entities):
-    global player
-    sEntities = sortEntities(entities)
-    combat = True
-    while combat:
-        for i in range(0, len(sEntities)):
-            sEntities[i].hitSomething(sEntities[:])
-        for en in sEntities:
-            if en.dead():
-                sEntities.remove(en)
-        if player not in sEntities or len(sEntities) <= 1:
-            combat = False
-    if player.dead():
-        print("You have been slain!")
-        Globals.quitGame = True
-
-def sortEntities(entities):
-    orderedEntities = []
-    orderedInitiative = []
-    initiative = []
-    neg = 0
-    for i in range(0, len(entities)):
-        initiative.append(entities[i].initiative())
-        try:
-            if int(initiative[i]) < neg:
-                neg = initiative[i]
-        except:
-            pass
-    for i in range(0, len(initiative)):
-        initiative[i] = int(initiative[i]) + neg
-    orderedInitiative = sorted(initiative)
-    for i in range(len(orderedInitiative)-1, -1, -1):
-        for j in range(len(initiative)-1, -1, -1):
-            if orderedInitiative[i] == initiative[j]:
-                orderedEntities.append(entities[j])
-                break
-    return orderedEntities
 def getKey():
-    player.inventory.append(["item","key"])
-=======
->>>>>>> e2831edd69abbd93efd4799e8250ab527da97696
+    Globals.player.inventory.append(["item","key"])
 for i in range(15):
     print(Gnoblin(i))
 
