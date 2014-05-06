@@ -1,5 +1,6 @@
 from Character import Character
 from random import randint
+from Affix import getGnoblinName
 
 class Gnoblin(Character):
     def __init__(self,level, pName = None, pStr = None, pDex = None, pMnd = None, pLck = None, pWeapon = None, pArmor = None, pInventory = None, pHp = None,
@@ -12,7 +13,7 @@ class Gnoblin(Character):
             Character.__init__(self, pName, pStr, pDex, pMnd, pLck, pWeapon, pArmor, pInventory, pHp, pLevel, pAp, pDescription, pAge, pMp, pPp, pManaEnabled)
 
     def createEnemy(self, level):
-        name = "Gnoblin"
+        name = getGnoblinName(level)
         statsFlag = False
         while statsFlag == False:
             STR = randint(1,8)-randint(1,6)
