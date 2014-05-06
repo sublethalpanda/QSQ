@@ -27,6 +27,7 @@ def _main():
 
 def getInput():
     global player
+    global doorUnlocked
     options = [];
     if(Globals.gameState == "Load"):
         options.append(Selection("New Game", ["new", "new game"], "create()"))
@@ -39,6 +40,13 @@ def getInput():
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
     if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
+        if Map.positionCheck() == [0,4]:
+            if player.inventory[0] == "key":
+                options.append(Selection("Get Key",["get","get key"],"player.inventory.append['key']"))
+        elif map.positionCheck() == [4,5]:
+            if doorUnlocked == False:
+                if player.inventory[0] == "key":
+                    options.append(Selection("Unlock Door",["unlock","unlock door"],"doorUnlocked = True"))
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
