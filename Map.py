@@ -156,25 +156,21 @@ def checkDirect(userIn):
     blockFlag = False
     if userIn == "n":
         if room(position[0],position[1]+1,userIn):
-            print("Moving north")
             position[1] += 1
         else:
             blockFlag = True
     elif userIn =="s":
         if room(position[0],position[1]-1,userIn):
-            print("Moving south")
             position[1] -= 1
         else:
             blockFlag = True
     elif userIn =="e":
         if room(position[0]+1,position[1],userIn):
-            print("Moving east")
             position[0] += 1
         else:
             blockFlag = True
     elif userIn =="w":
         if room(position[0]-1,position[1],userIn):
-            print("Moving west")
             position[0] -= 1
         else:
             blockFlag = True
@@ -186,7 +182,6 @@ def checkDirect(userIn):
         if randint(1,3) == 1:
             print("Initiate combat here plz.")
 flag = False
-print("Pick a direction. type 'exit' to leave.")
 while flag == False:
     main()
 
