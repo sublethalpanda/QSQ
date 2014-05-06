@@ -9,7 +9,7 @@ from Selection import Selection
 import sys
 import pickle
 import os
-import Map
+from Map import gameMap
 ##############################################################################################
 #                                       Variables
 ##############################################################################################
@@ -47,7 +47,7 @@ def getInput():
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
-        if Map.positionCheck() == [2,4]:
+        if gameMap.positionCheck() == [2,4]:
             options.append(Selection("Rest",["rest"],"player.rest()"))
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
     if gameState == "Combat":
@@ -92,7 +92,7 @@ def create():
     global gameState
     player = Player()
     gameState = "Dungeon"
-    Map.roomDesc(Map.positionCheck())
+    gameMap.roomDesc(gameMap.positionCheck())
 
 def save():
     print("Saving...")
@@ -112,7 +112,7 @@ def load():
         loadingFlag = True
         gameState = "Dungeon"
         print(player.name,"loaded successfully.")
-        Map.roomDesc(Map.positionCheck())
+        gameMap.roomDesc(gameMap.positionCheck())
     else:
         print("Player not found")
 
