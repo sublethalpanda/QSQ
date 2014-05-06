@@ -9,14 +9,23 @@ class Affix(Enum):
 
     @classmethod
     def getRandom(cls, min, max):
-        return cls(randint(min, max))
+        validEnum = False
+        enum = None
+        while not validEnum:
+            try:
+                enum = cls(randint(min, max))
+                validEnum = True
+            except:
+                pass
+        return enum
+
 
     @classmethod
     def getSmallest(cls, floor):
         min = 0
         for en in cls:
             val = en.value
-            if value < min and (floor == None or value > floor):
+            if val < min and (floor == None or val > floor):
                 min = val
         return cls(min)
 
@@ -29,7 +38,6 @@ class Affix(Enum):
         max = 0;
         for en in cls:
             val = en.value
-            print(val)
             if val > max and (ceil == None or val < ceil):
                 max = val
         return cls(max)
@@ -40,7 +48,7 @@ class Affix(Enum):
 
     @classmethod
     def getSizeFor(cls, level):
-        pass
+        return cls.getRandom(level-cls.getMax().value, level+cls.getMin().value)
 
 @unique
 class Suffix(Affix):
@@ -56,6 +64,24 @@ class Prefix(Affix):
     Big = 1
     Dragon = 10
     Man = 3
+
+def get(level):
+    valid = False
+    prefix = None
+    suffix = None
+    while not valid:
+        prefix = Prefix.getSizeFor(level);
+        try:
+            suffix = Suffix(level-prefix.value)
+            if prefix.value + suffix.value == level:
+                valid = True
+        except:
+            pass
+    return {'prefix':prefix,'suffix':suffix}
+
+def getGnoblinName(level):
+    g = get(level)
+    return g['prefix'].name + " Gnoblin " + g['suffix'].name
 
 #
 # ##
