@@ -13,7 +13,7 @@ def main():
     roomDesc(pos[0],pos[1])
     print(pos)
 
-def room(x,y,dir):
+def room(x,y,direc):
     global flag
     pos = [x,y]
     if pos == [2,0]:
@@ -53,69 +53,69 @@ def room(x,y,dir):
         return True
     elif pos == [0,3]:
         #Offshoot
-        if dir !="w":
+        if direc !="w":
             return False
         else:
             return True
     elif pos == [1,3]:
-        if dir == "w":
+        if direc == "w":
             return False
         else:
             return True
     elif pos == [2,3]:
-        if dir == "e":
+        if direc == "e":
             return False
         else:
             return True
     elif pos == [3,3]:
-        if dir == "w":
+        if direc == "w":
             return False
         else:
             return True
     elif pos == [4,3]:
-        if dir == "e":
+        if direc == "e":
             return False
         else:
             return True
     elif pos ==[0,4]:
         #Key Room
-        if dir == "n":
+        if direc == "n":
             return False
         else:
             return True
     elif pos == [1,4]:
-        if dir == "w":
+        if direc == "w":
             return False
         else:
             return True
     elif pos == [2,4]:
         #Rest area
-        if dir == "n":
+        if direc == "n":
             return True
         else:
             return False
     elif pos == [3,4]:
-        if dir == "e" or dir == "w":
+        if direc == "e" or dir == "w":
             return False
         else:
             return True
     elif pos == [4,4]:
-        if dir == "e":
+        if direc == "e":
             return False
         else:
             return True
     elif pos == [1,5]:
         return True
     elif pos == [2,5]:
-        if dir == "n":
+        if direc == "n":
             return False
         else:
             return True
     elif pos == [3,5]:
-        if dir == "w":
+        if direc == "w":
             return False
     elif pos == [4,5]:
-        if dir == "e":
+        if direc == "e":
             return False
         else:
             return True
@@ -128,74 +128,7 @@ def room(x,y,dir):
     return True
 
 def roomDesc(x,y):
-    pos = [x,y]
-#         if pos == [2,0]:
-#         #Exit
-#
-#     elif pos == [2,1]:
-#         #Entrance room, N E W, S exits.
-#
-#     elif pos == [3,0]:
-#         #Offshoot
-#
-#     elif pos == [0,1]:
-#         #Offshoot
-#
-#     elif pos == [1,1]:
-#         #NEW Junction
-#
-#     elif pos == [3,1]:
-#         #SEW Junction
-#
-#     elif pos == [4,1]:
-#         #NEW Junction
-#
-#     elif pos == [5,1]:
-#         #Offshoot
-#
-#     elif pos == [1,2]:
-#         #NSE Junction
-#
-#     elif pos == [2,2]:
-#         #NSW Junction
-#
-#     elif pos == [4,2]:
-#         #NS Hall
-#
-#     elif pos == [0,3]:
-#         #Offshoot
-#
-#     elif pos == [1,3]:
-#
-#     elif pos == [2,3]:
-#
-#     elif pos == [3,3]:
-#
-#     elif pos == [4,3]:
-#
-#     elif pos ==[0,4]:
-#         #Key Room
-#
-#     elif pos == [1,4]:
-#
-#     elif pos == [2,4]:
-#         #Rest area
-#
-#     elif pos == [3,4]:
-#
-#     elif pos == [4,4]:
-#
-#     elif pos == [1,5]:
-#
-#     elif pos == [2,5]:
-#
-#     elif pos == [3,5]:
-#
-#     elif pos == [4,5]:
-#
-#     elif pos == [2,6]:
-#
-#     elif pos == [4,6]:
+    pass
 
 
 def checkDirect(userIn):
