@@ -209,12 +209,17 @@ class Character(object):
             pdamage = atRoll['damage']
             #print(pdamage)
             #RR and RT
-        if(atRoll['toHit'] > sys.maxsize / 2):
-            target = self
-        elif(atRoll['toHit'] < (-sys.maxsize-1) / 2):
-            pdamage *= 2
-        target.damage(pdamage)
-        print(self.name, "Hits", target.name, "for", pdamage, "damage")
+            crfumble = ""
+            if(atRoll['toHit'] > sys.maxsize / 2):
+                crfumble = "Crits and"
+                pdamage *= 2
+            elif(atRoll['toHit'] < (-sys.maxsize-1) / 2):
+                crfumbel = "Fumbles and"
+                target = self
+            target.damage(pdamage)
+            print(self.name, crfumble, "Hits", target.name, "for", pdamage, "damage")
+        else:
+            print(self.name, "misses", target.name)
         if target.dead():
             target.die(self)
 
