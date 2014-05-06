@@ -164,15 +164,17 @@ class Player(Character):
         elif("attack" in usrIn):
             validTarget = False
             selection = -1
-            while not validTarget:
-                print("Who would you like to attack?")
-                for i in range(0, len(entities)):
-                    print(i, "A level", entities[i].level, entities[i].name)
-                usrIn = input(">")
-                try:
-                    selection = int(usrIn)
-                    validTarget = True
-                except:
-                    pass
-
-            self.attack(entities[i])
+            if len(entities) != 1:
+                while not validTarget:
+                    print("Who would you like to attack?")
+                    for i in range(0, len(entities)):
+                        print(i, "A level", entities[i].level, entities[i].name)
+                    usrIn = input(">")
+                    try:
+                        selection = int(usrIn)
+                        validTarget = True
+                    except:
+                        pass
+            else:
+                selection = 0
+            self.attack(entities[selection])

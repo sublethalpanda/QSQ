@@ -21,8 +21,6 @@
 ##############################################################################################
 from random import randint
 from Character import Character
-from Radix import KVEntry
-from Radix import Sort
 from PC import Player
 from Gnoblin import Gnoblin
 from Selection import Selection
@@ -85,8 +83,8 @@ def quitGameGame():
     quitGame = True
 
 def testLevel():
-        player.AP = 100
-        player.checkLevel()
+    player.AP = 100
+    player.checkLevel()
 
 def testCombat():
     global player
@@ -125,9 +123,20 @@ def load():
 def _combat(entities):
     global gameState
     global player
+    global quitGame
     sEntities = sortEntities(entities)
-    for i in range(0, len(sEntities)):
-        sEntities[i].hitSomething(sEntities[:])
+    combat = True
+    while combat:
+        for i in range(0, len(sEntities)):
+            sEntities[i].hitSomething(sEntities[:])
+        for en in sEntities:
+            if en.dead():
+                sEntities.remove(en)
+        if player not in sEntities or len(sEntities) <= 1:
+            combat = False
+    if player.dead():
+        print("You have been slain!")
+        quitGame = True
 
 def sortEntities(entities):
     orderedEntities = []
@@ -143,12 +152,11 @@ def sortEntities(entities):
             pass
     for i in range(0, len(initiative)):
         initiative[i] = int(initiative[i]) + neg
-    orderedInitiative = Sort(initiative)
-    for i in range(0, len(orderedInitiative)):
-        for j in range(0, len(initiative)):
+    orderedInitiative = sorted(initiative)
+    for i in range(len(orderedInitiative)-1, -1, -1):
+        for j in range(len(initiative)-1, -1, -1):
             if orderedInitiative[i] == initiative[j]:
                 orderedEntities.append(entities[j])
-                del entities[j]
                 break
     return orderedEntities
 _main()

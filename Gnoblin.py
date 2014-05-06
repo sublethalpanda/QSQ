@@ -54,6 +54,6 @@ class Gnoblin(Character):
             return
         if self in entities:
             entities.remove(self)
-        index = randint(0, len(entities))
+        index = randint(0, len(entities)) -1
         target = entities[index]
         self.attack(target)

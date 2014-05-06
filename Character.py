@@ -159,8 +159,8 @@ class Character(object):
         if tempRoll != "crit" and tempRoll != "fumble":
             tempRoll += tempBonus + self.weapon[4]
 
-        tempDamage = randint(1,self.weapon[3])+tempBonus
-        print(tempDamage)
+        tempDamage = max(0, randint(1,self.weapon[3])+tempBonus)
+        #print(tempDamage)
         return {'toHit':tempRoll,'damage':tempDamage}
 
     def rolltoDefend(self):
@@ -207,7 +207,7 @@ class Character(object):
         pdamage = 0
         if(atRoll['toHit'] > defRoll):
             pdamage = atRoll['damage']
-            print(pdamage)
+            #print(pdamage)
             #RR and RT
         if(atRoll['toHit'] > sys.maxsize / 2):
             target = self
