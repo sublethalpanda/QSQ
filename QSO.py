@@ -9,8 +9,7 @@ from Selection import Selection
 import sys
 import pickle
 import os
-from map import mapMain
-
+import Map
 ##############################################################################################
 #                                       Variables
 ##############################################################################################
@@ -43,6 +42,14 @@ def getInput():
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
+    if gameState == "Dungeon":
+        options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"mapMain(valInput)"))
+        if player.AP >= 100:
+            options.append(Selection("Level Up", ["level", "level up"], "level()"))
+        options.append(Selection("Save Game", ["save", "save game"], "save()"))
+        if Map.positionCheck() == [2,4]:
+            options.append(Selection("Rest",["rest"],"player.rest()"))
+        options.append(Selection("Display Character",["display","display character"], "print(player)"))
     if gameState == "Combat":
         pass
     options.append(Selection("Exit Game", ["exit", "exit game"], "quitGameGame()"))
@@ -65,6 +72,9 @@ def getInput():
 
 def quitGameGame():
     global quitGame
+    userIn = input("Would you like to save first?").lower()
+    if "y" in userIn:
+        save()
     quitGame = True
 
 def level():
@@ -81,7 +91,8 @@ def create():
     global player
     global gameState
     player = Player()
-    gameState = "Running"
+    gameState = "Dungeon"
+    Map.roomDesc(Map.positionCheck())
 
 def save():
     print("Saving...")
@@ -99,8 +110,9 @@ def load():
         player = pickle.load( open( "player.qso","rb"))
         global loadingFlag
         loadingFlag = True
-        gameState = "Running"
+        gameState = "Dungeon"
         print(player.name,"loaded successfully.")
+        Map.roomDesc(Map.positionCheck())
     else:
         print("Player not found")
 
@@ -144,8 +156,3 @@ def sortEntities(entities):
                 break
     return orderedEntities
 _main()
-
-
-flag = False
-while flag == False:
-    mapMain()

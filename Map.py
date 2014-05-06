@@ -1,17 +1,18 @@
 from random import randint
+import QSO
 position = [2,1]
 
 #Test Input
+def positionCheck():
+    return position
 
-def mapMain():
+def mapMain(userIn):
     roomDesc(position[0],position[1])
     global flag
-    userIn = input("\n>").lower()
-    if userIn == "exit":
-        print("closing...")
-        flag = True
     userIn = userIn[0:1]
     checkDirect(userIn)
+    if flag == True:
+        QSO.quitGameGame()
 
 def room(x,y,direc):
     global flag
