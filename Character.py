@@ -99,13 +99,17 @@ class Character(object):
             lvlIn = input("\n>").lower()
             options = ["str", "dex", "mnd", "lck", "hp die","roll hp","mp die","roll mp","pp die", "roll pp","damage"]
             results = ["STR increased!", "DEX increased!", "MND increased!",
-                       "LCK increased!", "HP die increased"]
+                       "LCK increased!", "HP die increased!", "HP increased!",
+                       "MP die increased!", "MP increased!", "PP die increased!",
+                       "PP increased!", "Damage increased!"]
             try:
                 lvlIn = int(lvlIn)
             except:
                 lvlIn = options.index(lvlIn) + 1
-            if lvlIn == 4 and (self.LCK >=5 or self.LCK <= -5):
+            if lvlIn == 4 and (self.LCK <5 or self.LCK > -5):
                 print("You don't have access to the LCK stat!")
+            elif (lvlIn == 7 or lvlIn == 8) and self.manaEnabled == False:
+                print("You don't have access to your MP abilities. Try increasing your MND.")
             else:
                 self.levelUp(lvlIn)
                 print(results[lvlIn-1])
@@ -155,10 +159,8 @@ class Character(object):
         elif self.BAS == "LCK":
             tempBonus = self.LCK
         tempRoll = self.roll()
-
         if tempRoll != "crit" and tempRoll != "fumble":
             tempRoll += tempBonus + self.weapon[4]
-
         tempDamage = max(0, randint(1,self.weapon[3])+tempBonus)
         #print(tempDamage)
         return {'toHit':tempRoll,'damage':tempDamage}
