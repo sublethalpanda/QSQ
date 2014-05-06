@@ -173,8 +173,7 @@ def checkDirect(userIn):
     if blockFlag == True:
         print("You can't go that way!")
     else:
-        if randint(1,3) == 1:
-            print("Initiate combat here plz.")
+        if randint(1,3) == 1 and pos != [2,0] and pos!= [1,4] and pos != [4,6]:
             combat([Globals.player, Gnoblin(max(1, randint(Globals.player.level - 5, Globals.player.level + 5)))])
 
 
