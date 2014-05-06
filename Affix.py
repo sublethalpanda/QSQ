@@ -52,26 +52,44 @@ class Affix(Enum):
 
 @unique
 class Suffix(Affix):
-    Gnoblin = 0
-    Copter = 10
-    Man = 3
-    Troll = 4
-    WhoMustNotBeNamed = 40
-    Oakenshield = 14
-    Drunk = -3
+    Arm = -29
     Fart = -15
     Face = -12
-    Arm = -29
+    Hobo=-6
+    Drunk = -3
+    Gnoblin = 0
+    Man = 3
+    Troll = 4
+    Copter = 10
     King = 12
     Haensel = 13
+    Oakenshield = 14
+    Elf=27
+    WhoMustNotBeNamed = 40
+    Devil=50
 
 @unique
 class Prefix(Affix):
-    Gnoblin = 0
-    Sad = -1
+    Ginger = -9000
+    CreppyLittleChild = -1001
+    CuteAnimeGirl = -1000
+    Cursed = -231
+    Headless = -100
+    Riddler = -90
+    Legless = -60
+    BatmanCosplay = -58
+    Armless = -50
+    CheesyJokes = -17
+    DunkinDonuts = -13
+    Drunkin = -12
+    Sightless = -7
+    Puppy = -5
+    Angushied = -4
+    Smallest = -3
     Poor = -2
+    Sad = -1
+    Gnoblin = 0
     Big = 1
-    Dragon = 10
     Man = 3
     Pirate = 4
     Pointy = 5
@@ -79,10 +97,10 @@ class Prefix(Affix):
     Haggardly = 7
     PotatoFaced = 8
     TreeSkin = 9
+    Dragon = 10
     Shieldless = 11
     Obama = 12
     HulkBeef = 13
-    Sightless = -7
     Aggressive = 14
     ManHater = 15
     LadyLicker = 16
@@ -92,34 +110,23 @@ class Prefix(Affix):
     SurfHippie = 20
     Norwegian = 21
     Candy = 22
-    Gamer = 250
-    OakenShieldless = 50
     Unicorn = 23
-    Pegaus = 100
-    Budski= 150
-    Skinner = 111
-    Angushied = -4
-    Armless = -50
-    Legless = -60
-    Headless = -100
-    Heartless = 500
-    Cursed = -231
-    Ginger = -9000
-    CuteAnimeGirl = -1000
-    Puppy = -5
-    Drunkin = -12
-    DunkinDonuts = -13
-    DrunkenMaster = 2000
-    Over9000 = 9001
-    Smallest = -3
-    BatmanCosplay = -58
-    FireLord = 15000
-    CreppyLittleChild = -1001
-    DonkeyKong = 51
-    CheesyJokes = -17
-    Riddler = -90
     Haensel = 24
     Michael = 25
+    PurplePeoplEater=26
+    FireNation=27
+    WaterBending=28
+    OakenShieldless = 50
+    DonkeyKong = 51
+    Pegaus = 100
+    Skinner = 111
+    RainbowRiding=117
+    Gamer = 250
+    Budski = 150
+    Heartless = 500
+    DrunkenMaster = 2000
+    Over9000 = 9001
+    FireLord = 15000
 
 def get(level):
     valid = False

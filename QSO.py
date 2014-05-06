@@ -12,11 +12,6 @@ import sys
 import pickle
 import os
 import Map
-##############################################################################################
-#                                       Variables
-##############################################################################################
-
-#Flag if a char has already been created
 
 ##############################################################################################
 #                                       Functions
@@ -112,7 +107,5 @@ def load():
         print("Player not found")
 def getKey():
     Globals.player.inventory.append(["item","key"])
-for i in range(15):
-    print(Gnoblin(i))
 
 _main()
