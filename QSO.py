@@ -39,7 +39,7 @@ def getInput():
         if Map.positionCheck() == [0,4]:
             if player.inventory[0] == "key":
                 options.append(Selection("Get Key",["get","get key"],"player.inventory.append['key']"))
-        elif map.positionCheck() == [4,5]:
+        elif Map.positionCheck() == [4,5]:
             if Globals.doorUnlocked == False:
                 if player.inventory[0] == "key":
                     options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
