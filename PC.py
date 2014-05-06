@@ -161,7 +161,7 @@ class Player(Character):
         usrIn = input("\n What would you like to do? (Attack, Run Away)\n>").lower()
         if("run" in usrIn):
             return False
-        elif("attack" in usrIn):
+        elif("attack" in usrIn or usrIn == ""):
             validTarget = False
             selection = -1
             if len(entities) != 1:
