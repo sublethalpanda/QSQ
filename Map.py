@@ -83,7 +83,7 @@ def room(x,y,direc):
         if direc == "w":
             return False
         else:
-            combat[Globals.player, Gnoblin(Globals.player.level + 10)]
+            combat([Globals.player, Gnoblin(Globals.player.level + 10)])
             return True
     elif position == [2,4]:
         print("This is the resting room")
@@ -120,7 +120,7 @@ def room(x,y,direc):
     elif position == [2,6]:
         return True
     elif position == [4,6]:
-        combat[Globals.player, Gnoblin(Globals.player.level + 20)]
+        combat([Globals.player, Gnoblin(Globals.player.level + 20)])
         return True
     else:
         return False
