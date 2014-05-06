@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, unique
 from random import randint
 
 class Affix(Enum):
@@ -15,31 +15,40 @@ class Affix(Enum):
     def getSmallest(cls, floor):
         min = 0
         for en in cls:
-            if en < min and (ceil == None or en > ceil):
-                min = en
+            val = en.value
+            if value < min and (floor == None or value > floor):
+                min = val
+        return cls(min)
 
     @classmethod
-    def getSmallest(cls):
-        cls.getSmallest(None)
+    def getMin(cls):
+        return cls.getSmallest(None)
 
     @classmethod
     def getLargest(cls, ceil):
         max = 0;
         for en in cls:
-            if en > max and (ceil == None or en < ceil):
-                max = en
+            val = en.value
+            print(val)
+            if val > max and (ceil == None or val < ceil):
+                max = val
+        return cls(max)
 
     @classmethod
-    def getLargest(cls):
-        cls.getLargest(None)
+    def getMax(cls):
+        return cls.getLargest(None)
 
-@Unique
+    @classmethod
+    def getSizeFor(cls, level):
+        pass
+
+@unique
 class Suffix(Affix):
     Gnoblin = 0
     Copter = 10
     Man = 3
 
-@Unique
+@unique
 class Prefix(Affix):
     Gnoblin = 0
     Sad = -1
@@ -47,7 +56,7 @@ class Prefix(Affix):
     Big = 1
     Dragon = 10
     Man = 3
-    
+
 #
 # ##
 # ##Table I

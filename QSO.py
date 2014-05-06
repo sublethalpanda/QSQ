@@ -1,21 +1,3 @@
-#Current bugs
-#Selecting '1' for attacking a gnoblin results in target out of range.
-#Selecting '0' results in attacking foe, not self.
-#Not sure how the level up selection works, but I'm getting an out-of-index when attempting anything above or equal to 6.
-#I can increase LCK without knowing it- meant to be mutable ONLY IF known.
-#I'll bet I can increase MP as well, needs to depend on whether manaEnabled == True.
-
-# Who would you like to attack?
-# 0 A level 6 Mark
-# 1 A level 1 Gnoblin
-# >0
-# Mark Hits Gnoblin for 8 damage
-# Gnoblin Hits Gnoblin for 11 damage
-# The Gnoblin dies, giving Gnoblin 173 AP
-# What would you like to do? (Fight, Level Up, Save Game, Exit Game)
-
-
-
 ##############################################################################################
 #                                       Import
 ##############################################################################################
