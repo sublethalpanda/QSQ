@@ -1,4 +1,4 @@
-pos = [1,2]
+pos = [2,1]
 
 #Test Input
 
@@ -10,46 +10,217 @@ def main():
         flag = True
     userIn = userIn[0:1]
     checkDirect(userIn)
-    room(pos[0],pos[1])
-def room(x,y):
+    roomDesc(pos[0],pos[1])
+    print(pos)
+
+def room(x,y,dir):
+    global flag
     pos = [x,y]
-    if pos == [1,2]:
-        print("entrance room")
-    elif pos == [1,3]:
-        print("north of entrance")
+    if pos == [2,0]:
+        #Exit
+        print("You exit the cave")
+        flag = True
+        return True
+    elif pos == [2,1]:
+        #Entrance room, N E W, S exits.
+        return True
+    elif pos == [3,0]:
+        #Offshoot
+        return True
+    elif pos == [0,1]:
+        #Offshoot
+        return True
+    elif pos == [1,1]:
+        #NEW Junction
+        return True
+    elif pos == [3,1]:
+        #SEW Junction
+        return True
+    elif pos == [4,1]:
+        #NEW Junction
+        return True
+    elif pos == [5,1]:
+        #Offshoot
+        return True
+    elif pos == [1,2]:
+        #NSE Junction
+        return True
     elif pos == [2,2]:
-        print("east of entrance")
-    elif pos == [0,2]:
-        print("west of entrance")
+        #NSW Junction
+        return True
+    elif pos == [4,2]:
+        #NS Hall
+        return True
+    elif pos == [0,3]:
+        #Offshoot
+        if dir !="w":
+            return False
+        else:
+            return True
+    elif pos == [1,3]:
+        if dir == "w":
+            return False
+        else:
+            return True
+    elif pos == [2,3]:
+        if dir == "e":
+            return False
+        else:
+            return True
+    elif pos == [3,3]:
+        if dir == "w":
+            return False
+        else:
+            return True
+    elif pos == [4,3]:
+        if dir == "e":
+            return False
+        else:
+            return True
+    elif pos ==[0,4]:
+        #Key Room
+        if dir == "n":
+            return False
+        else:
+            return True
+    elif pos == [1,4]:
+        if dir == "w":
+            return False
+        else:
+            return True
+    elif pos == [2,4]:
+        #Rest area
+        if dir == "n":
+            return True
+        else:
+            return False
+    elif pos == [3,4]:
+        if dir == "e" or dir == "w":
+            return False
+        else:
+            return True
+    elif pos == [4,4]:
+        if dir == "e":
+            return False
+        else:
+            return True
+    elif pos == [1,5]:
+        return True
+    elif pos == [2,5]:
+        if dir == "n":
+            return False
+        else:
+            return True
+    elif pos == [3,5]:
+        if dir == "w":
+            return False
+    elif pos == [4,5]:
+        if dir == "e":
+            return False
+        else:
+            return True
+    elif pos == [2,6]:
+        return True
+    elif pos == [4,6]:
+        return True
     else:
         return False
     return True
+
 def roomDesc(x,y):
-    pass
+    pos = [x,y]
+#         if pos == [2,0]:
+#         #Exit
+#
+#     elif pos == [2,1]:
+#         #Entrance room, N E W, S exits.
+#
+#     elif pos == [3,0]:
+#         #Offshoot
+#
+#     elif pos == [0,1]:
+#         #Offshoot
+#
+#     elif pos == [1,1]:
+#         #NEW Junction
+#
+#     elif pos == [3,1]:
+#         #SEW Junction
+#
+#     elif pos == [4,1]:
+#         #NEW Junction
+#
+#     elif pos == [5,1]:
+#         #Offshoot
+#
+#     elif pos == [1,2]:
+#         #NSE Junction
+#
+#     elif pos == [2,2]:
+#         #NSW Junction
+#
+#     elif pos == [4,2]:
+#         #NS Hall
+#
+#     elif pos == [0,3]:
+#         #Offshoot
+#
+#     elif pos == [1,3]:
+#
+#     elif pos == [2,3]:
+#
+#     elif pos == [3,3]:
+#
+#     elif pos == [4,3]:
+#
+#     elif pos ==[0,4]:
+#         #Key Room
+#
+#     elif pos == [1,4]:
+#
+#     elif pos == [2,4]:
+#         #Rest area
+#
+#     elif pos == [3,4]:
+#
+#     elif pos == [4,4]:
+#
+#     elif pos == [1,5]:
+#
+#     elif pos == [2,5]:
+#
+#     elif pos == [3,5]:
+#
+#     elif pos == [4,5]:
+#
+#     elif pos == [2,6]:
+#
+#     elif pos == [4,6]:
+
 
 def checkDirect(userIn):
     global pos
     blockFlag = False
     if userIn == "n":
-        if room(pos[0],pos[1]+1):
+        if room(pos[0],pos[1]+1,userIn):
             print("Moving north")
             pos[1] += 1
         else:
             blockFlag = True
     elif userIn =="s":
-        if room(pos[0],pos[1]-1):
+        if room(pos[0],pos[1]-1,userIn):
             print("Moving south")
             pos[1] -= 1
         else:
             blockFlag = True
     elif userIn =="e":
-        if room(pos[0]+1,pos[1]):
+        if room(pos[0]+1,pos[1],userIn):
             print("Moving east")
             pos[0] += 1
         else:
             blockFlag = True
     elif userIn =="w":
-        if room(pos[0]-1,pos[1]):
+        if room(pos[0]-1,pos[1],userIn):
             print("Moving west")
             pos[0] -= 1
         else:
@@ -66,536 +237,7 @@ while flag == False:
 
 
 
-# import wave
-#
-# def room(title, descrip):
-#     print("\n\n"+title+"\n\n"+descrip)
-#
-# currentlocation = ""
-#
-# def x2y1():
-#     direction = ""
-#     location = False
-#     room("x2 y1 Cave Entrance:", "The light from outside the cave lights up this first room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have four options. Would you like to travel West, North, East, or exit the tunnel by going South?").lower()
-#     while direction != "west" and direction != "north" and direction != "east" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, East, or South?").lower()
-#     if direction == "west":
-#         currentlocation = "x1y1"
-#         direction = ""
-#         x1y1()
-#     elif direction == "north":
-#         currentlocation = "x2y2"
-#         direction = ""
-#         x2y2()
-#     elif direction == "east":
-#         currentlocation = "x3y1"
-#         direction = ""
-#         x3y1()
-#     elif direction == "south":
-#         print("\n\nYou exit the cave and feel the warm glow of the sun on your face.")
-#         print("\n\nWell I guess that was enough of an adventure for one day.")
-#
-#
-# def x2y2():
-#     direction = ""
-#     location = False
-#     room("x2 y2 Cave Entrance:", "The light from outside the cave lights up this first room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel West, North, or South?").lower()
-#     while direction != "west" and direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, or South?").lower()
-#     if direction == "west":
-#         currentlocation = "x1y2"
-#         direction = ""
-#         x1y2()
-#     elif direction == "north":
-#         currentlocation = "x2y3"
-#         direction = ""
-#         x2y3()
-#     elif direction == "south":
-#         currentlocation = "x2y1"
-#         direction = ""
-#         x2y1()
-#
-#
-# def x1y1():
-#     direction = ""
-#     location = False
-#     room("x1 y1 :", "Tcave lights up this first room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel West, North, or East?").lower()
-#     while direction != "west" and direction != "north" and direction != "east":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, or East?").lower()
-#     if direction == "west":
-#         currentlocation = "x0y1"
-#         direction = ""
-#         x0y1()
-#     elif direction == "north":
-#         currentlocation = "x1y2"
-#         direction = ""
-#         x1y2()
-#     elif direction == "east":
-#         currentlocation = "x2y1"
-#         direction = ""
-#         x2y1()
-#
-# def x0y1():
-#     direction = ""
-#     location = False
-#     room("x0 y1 ", " room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou've reached a dead-end. You can only travel East.").lower()
-#     while direction != "east":
-#         direction = input("\n\nJust go East!").lower()
-#     if direction == "east":
-#         currentlocation = "x1y1"
-#         direction = ""
-#         x1y1()
-#
-# def x1y2():
-#     direction = ""
-#     location = False
-#     room("x1 y2 Cave Entrance:", "The light from outside the cave lights up this first room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel North, East or South?").lower()
-#     while direction != "south" and direction != "north" and direction != "east":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North, East or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x1y1"
-#         direction = ""
-#         x1y1()
-#     elif direction == "north":
-#         currentlocation = "x1y3"
-#         direction = ""
-#         x1y3()
-#     elif direction == "east":
-#         currentlocation = "x2y2"
-#         direction = ""
-#         x2y2()
-#
-#
-# def x1y3():
-#     direction = ""
-#     location = False
-#     room("x1 y3 Lair of the Cave Whale:", "The air around you smells of old sushi.")
-# # awesome WHALE TRAP (First Entry)
-#     direction = input("\n\nYou have three options. Would you like to travel West, North, or South?").lower()
-#     while direction != "west" and direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x1y2"
-#         direction = ""
-#         x1y2()
-#     elif direction == "north":
-#         currentlocation = "x1y4"
-#         direction = ""
-#         x1y4()
-#     elif direction == "west":
-#         currentlocation = "x0y3"
-#         direction = ""
-#         x0y3()
-#
-# def x0y3():
-#     direction = ""
-#     location = False
-#     room("x0 y3 Cave Entrance:", "The light from outside the cave lights up this first room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou've reached a dead-end. You can only travel East.").lower()
-#     while direction != "east":
-#         direction = input("\n\nJust go East!").lower()
-#     if direction == "east":
-#         currentlocation = "x1y3"
-#         direction = ""
-#         x1y3()
-#
-#
-# def x1y4():
-#     direction = ""
-#     location = False
-#     room("x1 y4 Mini Boss:", "Generic Description.")
-# # Mini Boss
-#     direction = input("\n\nYou have three options. Would you like to travel West, North, or South?").lower()
-#     while direction != "west" and direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x1y3"
-#         direction = ""
-#         x1y3()
-#     elif direction == "north":
-#         currentlocation = "x1y5"
-#         direction = ""
-#         x1y5()
-#     elif direction == "west":
-#         currentlocation = "x0y4"
-#         direction = ""
-#         x0y4()
-#
-# def x0y4():
-#     direction = ""
-#     location = False
-#     room("x0 y4 Something", "Keys. Lots of keys...")
-# # Key room
-#     direction = input("\n\nYou've reached a dead-end. You can only travel East.").lower()
-#     while direction != "east":
-#         direction = input("\n\nJust go East!").lower()
-#     if direction == "east":
-#         currentlocation = "x1y4"
-#         direction = ""
-#         x1y4()
-#
-#
-# def x1y5():
-#     direction = ""
-#     location = False
-#     room("x1 y5 Blank", "Generic Description.")
-# # Gnoblin
-#     direction = input("\n\nYou have two options. Would you like to travel South or East?").lower()
-#     while direction != "east" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel South or East?").lower()
-#     if direction == "south":
-#         currentlocation = "x1y4"
-#         direction = ""
-#         x1y4()
-#     elif direction == "east":
-#         currentlocation = "x2y5"
-#         direction = ""
-#         x2y5()
-#
-# def x2y5():
-#     direction = ""
-#     location = False
-#     room("x2 y5 Somewhere else:", "The light from outside the cave lights up this first room.")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel West, North, or East?").lower()
-#     while direction != "west" and direction != "north" and direction != "east":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, or East?").lower()
-#     if direction == "west":
-#         currentlocation = "x1y5"
-#         direction = ""
-#         x1y5()
-#     elif direction == "north":
-#         currentlocation = "x2y6"
-#         direction = ""
-#         x2y6()
-#     elif direction == "east":
-#         currentlocation = "x3y5"
-#         direction = ""
-#         x3y5()
-#
-#
-# def x2y6():
-#     direction = ""
-#     location = False
-#     room("x2 y6 Something please", "Ehh.")
-# # Gnoblin
-#     direction = input("\n\nYou've reached a dead-end. You can only travel South.").lower()
-#     while direction != "south":
-#         direction = input("\n\nJust go South!").lower()
-#     if direction == "south":
-#         currentlocation = "x2y5"
-#         direction = ""
-#         x2y5()
-#
-#
-# def x3y5():
-#     direction = ""
-#     location = False
-#     room("x3 y5 Lair:", "The air around you smells of something or other.")
-# # Gnoblin
-#     direction = input("\n\nYou have two options. Would you like to travel West or South?").lower()
-#     while direction != "west" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x3y4"
-#         direction = ""
-#         x3y4()
-#     elif direction == "west":
-#         currentlocation = "x2y5"
-#         direction = ""
-#         x2y5()
-#
-#
-# def x3y4():
-#     direction = ""
-#     location = False
-#     room("x3 y4 Lair # 2:", "The air around you smells of something else.")
-# # Gnoblin
-#     direction = input("\n\nYou have two options. Would you like to travel North or South?").lower()
-#     while direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x3y3"
-#         direction = ""
-#         x3y3()
-#     elif direction == "north":
-#         currentlocation = "x3y5"
-#         direction = ""
-#         x3y5()
-#
-# def x3y3():
-#     direction = ""
-#     location = False
-#     room("x3 y3 Lair # 3:", "The air around you smells of something else.. again.")
-# # Gnoblin
-#     direction = input("\n\nYou have two options. Would you like to travel West or North?").lower()
-#     while direction != "north" and direction != "west":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West or North?").lower()
-#     if direction == "west":
-#         currentlocation = "x2y3"
-#         direction = ""
-#         x2y3()
-#     elif direction == "north":
-#         currentlocation = "x3y4"
-#         direction = ""
-#         x3y4()
-#
-#
-# def x2y3():
-#     direction = ""
-#     location = False
-#     room("x2 y3 Somewhere else again:", "Some description")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel North, East, or South?").lower()
-#     while direction != "south" and direction != "north" and direction != "east":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North, East, or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x2y2"
-#         direction = ""
-#         x2y2()
-#     elif direction == "north":
-#         currentlocation = "x2y4"
-#         direction = ""
-#         x2y4()
-#     elif direction == "east":
-#         currentlocation = "x3y3"
-#         direction = ""
-#         x3y3()
-#
-#
-# def x2y4():
-#     direction = ""
-#     location = False
-#     room("x2 y4 The Rest Room", "You dont want to know..")
-# # Rest Room
-#     direction = input("\n\nYou've reached a dead-end. You can only travel South.").lower()
-#     while direction != "south":
-#         direction = input("\n\nJust go South!").lower()
-#     if direction == "south":
-#         currentlocation = "x2y3"
-#         direction = ""
-#         x2y3()
-#
-#
-# def x3y1():
-#     direction = ""
-#     location = False
-#     room("x3 y1 Somewhere else again:", "Some description")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel West, East, or South?").lower()
-#     while direction != "south" and direction != "west" and direction != "east":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, East, or South?").lower()
-#     if direction == "south":
-#         currentlocation = "x3y0"
-#         direction = ""
-#         x3y0()
-#     elif direction == "west":
-#         currentlocation = "x2y1"
-#         direction = ""
-#         x2y1()
-#     elif direction == "east":
-#         currentlocation = "x4y1"
-#         direction = ""
-#         x4y1()
-#
-#
-# def x3y0():
-#     direction = ""
-#     location = False
-#     room("x3 y0", "You dont want to know..")
-# # Gnoblin
-#     direction = input("\n\nYou've reached a dead-end. You can only travel North.").lower()
-#     while direction != "north":
-#         direction = input("\n\nJust go North!").lower()
-#     if direction == "north":
-#         currentlocation = "x3y1"
-#         direction = ""
-#         x3y1()
-#
-#
-# def x4y1():
-#     direction = ""
-#     location = False
-#     room("x4 y1 Somewhere else again:", "Some description")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have three options. Would you like to travel West, North, or East?").lower()
-#     while direction != "north" and direction != "west" and direction != "east":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel West, North, or East?").lower()
-#     if direction == "north":
-#         currentlocation = "x4y2"
-#         direction = ""
-#         x4y2()
-#     elif direction == "west":
-#         currentlocation = "x3y1"
-#         direction = ""
-#         x3y1()
-#     elif direction == "east":
-#         currentlocation = "x5y1"
-#         direction = ""
-#         x5y1()
-#
-#
-# def x4y2():
-#     direction = ""
-#     location = False
-#     room("x4 y2 Somewhere else again:", "Some description")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have two options. Would you like to travel North, or South?").lower()
-#     while direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North or South?").lower()
-#     if direction == "north":
-#         currentlocation = "x4y3"
-#         direction = ""
-#         x4y3()
-#     elif direction == "south":
-#         currentlocation = "x4y1"
-#         direction = ""
-#         x4y1()
-#
-# def x5y1():
-#     direction = ""
-#     location = False
-#     room("x5 y1", "You dont want to know..")
-# # gnoblin
-#     direction = input("\n\nYou've reached a dead-end. You can only travel West.").lower()
-#     while direction != "west":
-#         direction = input("\n\nJust go West!").lower()
-#     if direction == "west":
-#         currentlocation = "x4y1"
-#         direction = ""
-#         x4y1()
-#
-# def x4y3():
-#     direction = ""
-#     location = False
-#     room("x4 y3 Somewhere else again:", "Some description")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have two options. Would you like to travel North, or South?").lower()
-#     while direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North or South?").lower()
-#     if direction == "north":
-#         currentlocation = "x4y4"
-#         direction = ""
-#         x4y4()
-#     elif direction == "south":
-#         currentlocation = "x4y2"
-#         direction = ""
-#         x4y2()
-#
-# def x4y4():
-#     direction = ""
-#     location = False
-#     room("x4 y4 Somewhere else again:", "Some description")
-# ##    createEnemy(player.level)
-# ##    foe.summary()
-# ##    combat()
-#     direction = input("\n\nYou have two options. Would you like to travel North, or South?").lower()
-#     while direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North or South?").lower()
-#     if direction == "north":
-#         currentlocation = "x4y5"
-#         direction = ""
-#         x4y5()
-#     elif direction == "south":
-#         currentlocation = "x4y3"
-#         direction = ""
-#         x4y3()
-#
-#
-# def x4y5():
-#     direction = ""
-#     location = False
-#     room("x4 y5 Boss Door:", "Need a key")
-# ##    Boss Door. Need a key
-#     # this code will have to be altered to check whether the hero has a key or not. Maybe dictionary check for term "key"?
-#     direction = input("\n\nYou have two options. Would you like to travel North, or South?").lower()
-#     while direction != "north" and direction != "south":
-#         print("\n\nMaybe you didn't understand your options. Let's try again.")
-#         direction = input("\n\nWould you like to travel North or South?").lower()
-#     if direction == "north": #again, would need key
-#         currentlocation = "x4y6"
-#         direction = ""
-#         x4y6()
-#     elif direction == "south":
-#         currentlocation = "x4y4"
-#         direction = ""
-#         x4y4()
-#
-#
-# def x4y6():
-#     direction = ""
-#     location = False
-#     room("x4 y6.. This is the boss", "You probably won't it through this room alive...")
-# # Boss Room
-# ##    direction = input("\n\nYou've reached a dead-end. You can only travel West.").lower()
-# ##    while direction != "west":
-# ##        direction = input("\n\nJust go West!").lower()                        I DONT THINK DIRECTION MATTERS AT THIS POINT, unless you want to give the player the option to flee
-# ##    if direction == "south":
-# ##        currentlocation = "x4y5"
-# ##        direction = ""
-# ##        x4y5()
-#
-# endcave = False
-# while endcave == False:
-#     x2y1()
-#     endcave = True
-#
-#
-# print("\n\nYou have either beaten the boss by this point, or died embarrassingly. Or maybe you just ran away like a coward.")
-# input("\n\nPress Enter to exit")
-#
+
 #
 # ##
 # ##Table I
