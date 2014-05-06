@@ -58,3 +58,4 @@ class Gnoblin(Character):
         index = randint(0, len(entities)) -1
         target = entities[index]
         self.attack(target)
+        return True

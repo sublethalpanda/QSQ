@@ -178,6 +178,7 @@ class Player(Character):
             else:
                 selection = 0
             self.attack(entities[selection])
+        return True
     def rest(self):
         self.HP[0] = self.HP[1]
         if self.manaEnabled == True:
