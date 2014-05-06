@@ -38,7 +38,8 @@ def getInput():
         options.append(Selection("Load Game", ["load", "load game"], "load()"))
     if gameState == "Running":
         options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
-        options.append(Selection("Level Up", ["level", "level up"], "level()"))
+        if player.AP >= 100:
+            options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
     if gameState == "Combat":
         pass

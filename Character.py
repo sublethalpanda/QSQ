@@ -116,7 +116,7 @@ class Character(object):
                 self.level += 1
                 levelFlag = True
                 self.AP -= 100
-                print("Player leveled up!")
+                print(self.name, "leveled up!")
 
     def levelUp(self,selection):
         #str, dex, mnd, lck, hpdie, roll hp,
