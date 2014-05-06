@@ -1,6 +1,6 @@
 from random import randint
 position = [2,1]
-flag = False
+mapQuitFlag = False
 initFlag = False
 #Test Input
 def positionCheck():
@@ -11,12 +11,10 @@ def mapMain(userIn):
     if initFlag == False:
         roomDesc(position[0],position[1])
         initFlag = True
-    global flag
+    global mapQuitFlag
     userIn = userIn[0:1]
     checkDirect(userIn)
-    roomDesc(position[0],position[1])   
-    if flag == True:
-        QSO.quitGameGame()
+    roomDesc(position[0],position[1])
 
 def room(x,y,direc):
     global flag
@@ -27,37 +25,26 @@ def room(x,y,direc):
         flag = True
         return True
     elif position == [2,1]:
-        #Entrance room, N E W, S exits.
         return True
     elif position == [3,0]:
-        #Offshoot
         return True
     elif position == [0,1]:
-        #Offshoot
         return True
     elif position == [1,1]:
-        #NEW Junction
         return True
     elif position == [3,1]:
-        #SEW Junction
         return True
     elif position == [4,1]:
-        #NEW Junction
         return True
     elif position == [5,1]:
-        #Offshoot
         return True
     elif position == [1,2]:
-        #NSE Junction
         return True
     elif position == [2,2]:
-        #NSW Junction
         return True
     elif position == [4,2]:
-        #NS Hall
         return True
     elif position == [0,3]:
-        #Offshoot
         if direc !="w":
             return False
         else:
@@ -83,7 +70,6 @@ def room(x,y,direc):
         else:
             return True
     elif position ==[0,4]:
-        #Key Room
         print("This is where the key is")
         if direc == "n":
             return False
@@ -96,7 +82,6 @@ def room(x,y,direc):
             print("Initiate miniboss here")
             return True
     elif position == [2,4]:
-        #Rest area
         print("This is the resting room")
         if direc == "n":
             return True
