@@ -55,6 +55,10 @@ class Suffix(Affix):
     Gnoblin = 0
     Copter = 10
     Man = 3
+    Troll = 4
+    WhoMustNotBeNamed = 40
+    Oakenshield = 14
+
 
 @unique
 class Prefix(Affix):
@@ -64,6 +68,50 @@ class Prefix(Affix):
     Big = 1
     Dragon = 10
     Man = 3
+    Pirate = 4
+    Pointy = 5
+    CakeSlaying = 6
+    Haggardly = 7
+    PotatoFaced = 8
+    TreeSkin = 9
+    Shieldless = 11
+    Obama = 12
+    HulkBeef = 13
+    Sightless = 14
+    ManHater = 15
+    LadyLicker = 16
+    PizzaPicker = 17
+    FatAss = 18
+    Rapping = 19
+    SurfHippie = 20
+    Norwegian = 21
+    Candy = 22
+    Gamer = 250
+    OakenShieldless = 50
+    Unicorn = 23
+    Pegaus = 100
+    Budski= 150
+    Skinner = 111
+    Angushied = 2
+    armless = -50
+    legless = -60
+    headless = -100
+    heartless = 500
+    cursed = -231
+    Ginger = -9000
+    cuteAnimeGirl = -1000
+    puppy = -5
+    Drunkin = -12
+    DunkinDonuts = -13
+    DrunkenMaster = 2000
+    over9000 = 9001
+    smallest = -3
+    BatmanCosplay = -58
+    FireLord = 15000
+    CreppyLittleChild = -1000
+    DonkeyKong = 51
+    CheesyJokes = -17
+    Riddler = -90
 
 def get(level):
     valid = False
@@ -210,7 +258,9 @@ def getGnoblinName(level):
 ##95-96 the Undercity
 ##97-98 the Underworld
 ##99-00 the Unknown
-##
+##100-101 Liam Neesons
+##102-103 Articuno
+
 ##
 ##http://www.basicfantasy.org/dungeoneer.html
 ##
