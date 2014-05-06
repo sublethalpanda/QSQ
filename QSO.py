@@ -9,6 +9,7 @@ from Selection import Selection
 import sys
 import pickle
 import os
+from map import mapMain
 
 ##############################################################################################
 #                                       Variables
@@ -143,3 +144,8 @@ def sortEntities(entities):
                 break
     return orderedEntities
 _main()
+
+
+flag = False
+while flag == False:
+    mapMain()

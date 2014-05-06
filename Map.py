@@ -3,7 +3,7 @@ position = [2,1]
 
 #Test Input
 
-def main():
+def mapMain():
     roomDesc(position[0],position[1])
     global flag
     userIn = input("\n>").lower()
@@ -181,9 +181,6 @@ def checkDirect(userIn):
     else:
         if randint(1,3) == 1:
             print("Initiate combat here plz.")
-flag = False
-while flag == False:
-    main()
 
 
 
