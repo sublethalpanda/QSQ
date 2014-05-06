@@ -9,7 +9,7 @@ from Selection import Selection
 import sys
 import pickle
 import os
-from Map import gameMap
+import Map
 ##############################################################################################
 #                                       Variables
 ##############################################################################################
@@ -43,11 +43,11 @@ def getInput():
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
     if gameState == "Dungeon":
-        options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"mapMain(valInput)"))
+        options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
-        if gameMap.positionCheck() == [2,4]:
+        if Map.positionCheck() == [2,4]:
             options.append(Selection("Rest",["rest"],"player.rest()"))
         options.append(Selection("Display Character",["display","display character"], "print(player)"))
     if gameState == "Combat":
@@ -92,7 +92,8 @@ def create():
     global gameState
     player = Player()
     gameState = "Dungeon"
-    gameMap.roomDesc(gameMap.positionCheck())
+    a,b = Map.positionCheck()
+    Map.roomDesc(a,b)
 
 def save():
     print("Saving...")
@@ -112,7 +113,8 @@ def load():
         loadingFlag = True
         gameState = "Dungeon"
         print(player.name,"loaded successfully.")
-        gameMap.roomDesc(gameMap.positionCheck())
+        a,b = Map.positionCheck()
+        Map.roomDesc(a,b)
     else:
         print("Player not found")
 
