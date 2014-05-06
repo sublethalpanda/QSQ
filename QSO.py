@@ -33,20 +33,25 @@ def getInput():
         options.append(Selection("Load Game", ["load", "load game"], "load()"))
     if Globals.gameState == "Running":
         options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
-        if Globals.player.AP >= 100:
-            options.append(Selection("Level Up", ["level", "level up"], "level()"))
-        options.append(Selection("Save Game", ["save", "save game"], "save()"))
         options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
     if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
-        if Globals.player.AP >= 100:
-            options.append(Selection("Level Up", ["level", "level up"], "level()"))
-        options.append(Selection("Save Game", ["save", "save game"], "save()"))
+        if Map.positionCheck() == [0,4]:
+            if player.inventory[0] == "key":
+                options.append(Selection("Get Key",["get","get key"],"player.inventory.append['key']"))
+        elif map.positionCheck() == [4,5]:
+            if Globals.doorUnlocked == False:
+                if player.inventory[0] == "key":
+                    options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
         if Map.positionCheck() == [2,4]:
             options.append(Selection("Rest",["rest"],"Globals.player.rest()"))
         options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
     if Globals.gameState == "Combat":
         pass
+    if Globals.gameState != "Load" and Globals.gameState != "Combat":
+        if Globals.player.AP >= 100:
+            options.append(Selection("Level Up", ["level", "level up"], "level()"))
+        options.append(Selection("Save Game", ["save", "save game"], "save()"))
     options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
     stroptions = "("
     for i in range(0, len(options), 1):
@@ -107,5 +112,5 @@ def load():
         print("Player not found")
 for i in range(15):
     print(Gnoblin(i))
-    
+
 _main()
