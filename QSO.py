@@ -41,11 +41,11 @@ def getInput():
     if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if Map.positionCheck() == [0,4]:
-            if player.inventory[0] == "key":
-                options.append(Selection("Get Key",["get","get key"],"player.inventory.append['key']"))
-        elif map.positionCheck() == [4,5]:
+            if "key" not in player.inventory:
+                options.append(Selection("Get Key",["get","get key"],"player.inventory[0] = ['item','key']"))
+        elif Map.positionCheck() == [4,5]:
             if doorUnlocked == False:
-                if player.inventory[0] == "key":
+                if "key" in player.inventory:
                     options.append(Selection("Unlock Door",["unlock","unlock door"],"doorUnlocked = True"))
         if player.AP >= 100:
             options.append(Selection("Level Up", ["level", "level up"], "level()"))

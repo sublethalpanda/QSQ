@@ -113,7 +113,7 @@ class Player(Character):
         weapon = ["weapon","melee","Unarmed",6,0]
         #inv type, name, AS, RR, RT, Max Dex
         armor = ["armor","Unarmored",0,0,0,None]
-        inventory = []
+        inventory = [None]
         #Create an HP function here.
         #Temp,Max,Die,Rolls,Bonus
         hp = [0,0,0,0,0]
