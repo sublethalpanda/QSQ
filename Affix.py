@@ -62,6 +62,8 @@ class Suffix(Affix):
     Fart = -15
     Face = -12
     Arm = -29
+    King = 12
+    Haensel = 13
 
 @unique
 class Prefix(Affix):
@@ -96,25 +98,27 @@ class Prefix(Affix):
     Budski= 150
     Skinner = 111
     Angushied = -4
-    armless = -50
-    legless = -60
-    headless = -100
-    heartless = 500
-    cursed = -231
+    Armless = -50
+    Legless = -60
+    Headless = -100
+    Heartless = 500
+    Cursed = -231
     Ginger = -9000
-    cuteAnimeGirl = -1000
-    puppy = -5
+    CuteAnimeGirl = -1000
+    Puppy = -5
     Drunkin = -12
     DunkinDonuts = -13
     DrunkenMaster = 2000
-    over9000 = 9001
-    smallest = -3
+    Over9000 = 9001
+    Smallest = -3
     BatmanCosplay = -58
     FireLord = 15000
     CreppyLittleChild = -1001
     DonkeyKong = 51
     CheesyJokes = -17
     Riddler = -90
+    Haensel = 24
+    Michael = 25
 
 def get(level):
     valid = False

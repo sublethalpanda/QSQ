@@ -6,6 +6,7 @@ from Character import Character
 from PC import Player
 from Gnoblin import Gnoblin
 from Selection import Selection
+from Combat import combat
 import Globals
 import sys
 import pickle
@@ -26,35 +27,36 @@ def _main():
         getInput()
 
 def getInput():
-    global player
-    global doorUnlocked
     options = [];
     if(Globals.gameState == "Load"):
         options.append(Selection("New Game", ["new", "new game"], "create()"))
         options.append(Selection("Load Game", ["load", "load game"], "load()"))
     if Globals.gameState == "Running":
         options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
-        if player.AP >= 100:
-            options.append(Selection("Level Up", ["level", "level up"], "level()"))
-        options.append(Selection("Save Game", ["save", "save game"], "save()"))
-        options.append(Selection("Display Character",["display","display character"], "print(player)"))
+        options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
     if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if Map.positionCheck() == [0,4]:
+<<<<<<< HEAD
             if "key" not in player.inventory:
                 options.append(Selection("Get Key",["get","get key"],"getKey()"))
+=======
+            if player.inventory[0] == "key":
+                options.append(Selection("Get Key",["get","get key"],"player.inventory.append['key']"))
+>>>>>>> e2831edd69abbd93efd4799e8250ab527da97696
         elif Map.positionCheck() == [4,5]:
-            if doorUnlocked == False:
-                if "key" in player.inventory:
-                    options.append(Selection("Unlock Door",["unlock","unlock door"],"doorUnlocked = True"))
-        if player.AP >= 100:
-            options.append(Selection("Level Up", ["level", "level up"], "level()"))
-        options.append(Selection("Save Game", ["save", "save game"], "save()"))
+            if Globals.doorUnlocked == False:
+                if player.inventory[0] == "key":
+                    options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
         if Map.positionCheck() == [2,4]:
-            options.append(Selection("Rest",["rest"],"player.rest()"))
-        options.append(Selection("Display Character",["display","display character"], "print(player)"))
+            options.append(Selection("Rest",["rest"],"Globals.player.rest()"))
+        options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
     if Globals.gameState == "Combat":
         pass
+    if Globals.gameState != "Load" and Globals.gameState != "Combat":
+        if Globals.player.AP >= 100:
+            options.append(Selection("Level Up", ["level", "level up"], "level()"))
+        options.append(Selection("Save Game", ["save", "save game"], "save()"))
     options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
     stroptions = "("
     for i in range(0, len(options), 1):
@@ -80,18 +82,16 @@ def quitGame():
     Globals.quitGame = True
 
 def level():
-    player.checkLevel()
+    Globals.player.checkLevel()
 
 def testCombat():
-    global player
     entities = []
-    entities.append(player)
+    entities.append(Globals.player)
     entities.append(Gnoblin(1))
-    _combat(entities)
+    combat(entities)
 
 def create():
-    global player
-    player = Player()
+    Globals.player = Globals.player()
     Globals.gameState = "Dungeon"
     a,b = Map.positionCheck()
     Map.roomDesc(a,b)
@@ -100,23 +100,22 @@ def save():
     print("Saving...")
     if os.path.isfile("player.qso"):
         os.remove("player.qso")
-    global player
-    pickle.dump(player, open( "player.qso","wb"))
+    pickle.dump(Globals.player, open( "player.qso","wb"))
     print("Save complete!")
 
 def load():
     print("Loading")
     if os.path.isfile("player.qso"):
-        global player
-        player = pickle.load( open( "player.qso","rb"))
+        Globals.player = pickle.load( open( "player.qso","rb"))
         global loadingFlag
         loadingFlag = True
         Globals.gameState = "Dungeon"
-        print(player.name,"loaded successfully.")
+        print(Globals.player.name,"loaded successfully.")
         a,b = Map.positionCheck()
         Map.roomDesc(a,b)
     else:
         print("Player not found")
+<<<<<<< HEAD
 
 def _combat(entities):
     global player
@@ -157,6 +156,9 @@ def sortEntities(entities):
     return orderedEntities
 def getKey():
     player.inventory.append(["item","key"])
+=======
+>>>>>>> e2831edd69abbd93efd4799e8250ab527da97696
 for i in range(15):
     print(Gnoblin(i))
+
 _main()

@@ -1,5 +1,6 @@
 global gameState
 global quitGame
+global player
 global doorUnlocked
 
 doorUnlocked = False
