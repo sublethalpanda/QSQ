@@ -207,7 +207,6 @@ class Character(object):
         pdamage = 0
         if(atRoll['toHit'] > defRoll):
             pdamage = atRoll['damage']
-            #print(pdamage)
             #RR and RT
             crfumble = ""
             if(atRoll['toHit'] > sys.maxsize / 2):

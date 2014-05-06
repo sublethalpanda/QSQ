@@ -56,7 +56,7 @@ def getInput():
         options.append(Selection("Load Game", ["load", "load game"], "load()"))
     if gameState == "Running":
         options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
-        options.append(Selection("Level Up", ["level", "level up"], "testLevel()"))
+        options.append(Selection("Level Up", ["level", "level up"], "level()"))
         options.append(Selection("Save Game", ["save", "save game"], "save()"))
     if gameState == "Combat":
         pass
@@ -82,8 +82,7 @@ def quitGameGame():
     global quitGame
     quitGame = True
 
-def testLevel():
-    player.AP = 100
+def level():
     player.checkLevel()
 
 def testCombat():
