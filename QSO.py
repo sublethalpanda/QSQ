@@ -125,15 +125,9 @@ def load():
 def _combat(entities):
     global gameState
     global player
-    for en in entities:
-        print("PC", isinstance(en, Player))
-        print("Gnoblin", isinstance(en, Gnoblin),type(en))
     sEntities = sortEntities(entities)
-    for en in sEntities:
-        print("PC", isinstance(en, Player))
-        print("Gnoblin", isinstance(en, Gnoblin),type(en))
     for i in range(0, len(sEntities)):
-        sEntities[i].hitSomething(sEntities)
+        sEntities[i].hitSomething(sEntities[:])
 
 def sortEntities(entities):
     orderedEntities = []
