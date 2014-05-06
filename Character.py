@@ -168,7 +168,7 @@ class Character(object):
         tempRoll = self.roll()
         if tempRoll != "crit" and tempRoll != "fumble":
             tempRoll += tempBonus + self.weapon[4]
-        tempDamage = max(0, randint(1,self.weapon[3])+tempBonus)
+        tempDamage = max(1, randint(1,self.weapon[3])+tempBonus)
         #print(tempDamage)
         return {'toHit':tempRoll,'damage':tempDamage}
 
