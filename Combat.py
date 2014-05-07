@@ -6,6 +6,7 @@ def combat(entities):
     while combat:
         for i in range(0, len(sEntities)):
             combat = sEntities[i].hitSomething(sEntities[:])
+            print("HP:",str(Globals.player.HP[0])+"/"+str(Globals.player.HP[1]))
         for en in sEntities:
             if en.dead():
                 sEntities.remove(en)
