@@ -132,14 +132,18 @@ def get(level):
     valid = False
     prefix = None
     suffix = None
+    count = 0
     while not valid:
-        prefix = Prefix.getRandom(Suffix.getMin().value + level, Suffix.getMax().value - level)
+        prefix = Prefix.getRandom(Suffix.getMin().value + level, Suffix.getMax().value + level)
         try:
             suffix = Suffix(level-prefix.value)
             if prefix.value + suffix.value == level:
                 valid = True
         except:
             pass
+        count += 1
+        if count == 1000000:
+            print("We've gone through the loop 1 million times. I would recommend force quitting")
     return {'prefix':prefix,'suffix':suffix}
 
 def getGnoblinName(level):
