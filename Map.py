@@ -59,6 +59,17 @@ def room(x,y,direc):
         if direc == "w":
             return False
         else:
+            if Globals.whaleTrap == False:
+                Globals.whaleTrap = True
+                if randint(1,20)+Globals.player.DEX >= 20:
+                    print("You narrowly dodge a large form falling from the ceiling.\nA whale has fallen to the ground, covering the walls with bits of Baleen.")
+                else:
+                    tempDamage = randint(1,200)+50
+                    print("You are hit by a whale falling from the ceiling for",tempDamage,"damage.")
+                    Globals.player.HP[0] -=tempDamage
+                    if Globals.player.dead():
+                        print("Game Over...")
+                        Globals.quitGame = True
             return True
     elif position == [2,3]:
         if direc == "e":

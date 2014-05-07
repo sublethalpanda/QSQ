@@ -5,7 +5,9 @@ global doorUnlocked
 global miniBoss
 global defeatBoss
 global getKey
+global whaleTrap
 
+whaleTrap = False
 miniBoss = False
 defeatBoss = False
 doorUnlocked = False
