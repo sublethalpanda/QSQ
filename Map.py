@@ -18,7 +18,8 @@ def mapMain(userIn):
     global mapQuitFlag
     userIn = userIn[0:1]
     checkDirect(userIn)
-    roomDesc(position[0],position[1])
+    if not Globals.player.dead():
+        roomDesc(position[0],position[1])
 
 def room(x,y,direc):
     global flag

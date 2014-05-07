@@ -172,7 +172,7 @@ class Character(object):
         elif self.BAS == "LCK":
             tempBonus = self.LCK
         tempRoll = self.roll()
-        if tempRoll != "crit" and tempRoll != "fumble":
+        if tempRoll < sys.maxsize and tempRoll > -sys.maxsize-1:
             tempRoll += tempBonus + self.weapon[4]
         tempDamage = max(1, randint(1,self.weapon[3])+tempBonus)
         #print(tempDamage)
@@ -188,7 +188,7 @@ class Character(object):
         elif self.BDS == "LCK":
             tempBonus = self.LCK
         tempRoll = self.roll()
-        if tempRoll != "crit" and tempRoll != "fumble":
+        if tempRoll < sys.maxsize and tempRoll > -sys.maxsize-1:
             tempRoll += tempBonus + self.armor[2]
         return tempRoll
 

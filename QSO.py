@@ -23,47 +23,50 @@ def _main():
 
 def getInput():
     options = [];
-    if(Globals.gameState == "Load"):
-        options.append(Selection("New Game", ["new", "new game"], "create()"))
-        options.append(Selection("Load Game", ["load", "load game"], "load()"))
-    if Globals.gameState == "Running":
-        options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
-        options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
-    if Globals.gameState == "Dungeon":
-        options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
-        if Map.positionCheck() == [0,4]:
-            if Globals.getKey == False:
-                options.append(Selection("Get Key",["get","get key"],"Globals.getKey= True"))
-        elif Map.positionCheck() == [4,5]:
-            if Globals.doorUnlocked == False:
-                if Globals.getKey:
-                    options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
-        if Map.positionCheck() == [2,4]:
-            options.append(Selection("Rest",["rest"],"Globals.player.rest()"))
-        options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
-    if Globals.gameState == "Combat":
-        pass
-    if Globals.gameState != "Load" and Globals.gameState != "Combat":
-        if Globals.player.AP >= 100:
-            options.append(Selection("Level Up", ["level", "level up"], "level()"))
-        options.append(Selection("Save Game", ["save", "save game"], "save()"))
-    options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
-    stroptions = "("
-    for i in range(0, len(options), 1):
-        stroptions += str(options[i])
-        if i < len(options)-1:
-            stroptions += ", "
-    stroptions += ")"
-    valid = False
-    selection = None
-    while not valid:
-        valInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
-        for sel in options:
-            if sel.validSel(valInput):
-                valid = True
-                selection = sel
-                break
-    exec(sel.codeToExecute)
+    if Globals.gameState != "Load" and Globals.player.dead():
+        Globals.quitGame = True
+    else:
+        if(Globals.gameState == "Load"):
+            options.append(Selection("New Game", ["new", "new game"], "create()"))
+            options.append(Selection("Load Game", ["load", "load game"], "load()"))
+        if Globals.gameState == "Running":
+            options.append(Selection("Fight", ["fight", "fight something"], "testCombat()"))
+            options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
+        if Globals.gameState == "Dungeon":
+            options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
+            if Map.positionCheck() == [0,4]:
+                if Globals.getKey == False:
+                    options.append(Selection("Get Key",["get","get key"],"Globals.getKey= True"))
+            elif Map.positionCheck() == [4,5]:
+                if Globals.doorUnlocked == False:
+                    if Globals.getKey:
+                        options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
+            if Map.positionCheck() == [2,4]:
+                options.append(Selection("Rest",["rest"],"Globals.player.rest()"))
+            options.append(Selection("Display Character",["display","display character"], "print(Globals.player)"))
+        if Globals.gameState == "Combat":
+            pass
+        if Globals.gameState != "Load" and Globals.gameState != "Combat":
+            if Globals.player.AP >= 100:
+                options.append(Selection("Level Up", ["level", "level up"], "level()"))
+            options.append(Selection("Save Game", ["save", "save game"], "save()"))
+        options.append(Selection("Exit Game", ["exit", "exit game"], "quitGame()"))
+        stroptions = "("
+        for i in range(0, len(options), 1):
+            stroptions += str(options[i])
+            if i < len(options)-1:
+                stroptions += ", "
+        stroptions += ")"
+        valid = False
+        selection = None
+        while not valid:
+            valInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
+            for sel in options:
+                if sel.validSel(valInput):
+                    valid = True
+                    selection = sel
+                    break
+        exec(sel.codeToExecute)
 
 def quitGame():
     userIn = input("Would you like to save first?\n>").lower()
