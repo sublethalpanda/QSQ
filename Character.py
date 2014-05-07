@@ -104,7 +104,10 @@ class Character(object):
             try:
                 lvlIn = int(lvlIn)
             except:
-                lvlIn = options.index(lvlIn) + 1
+                try:
+                    lvlIn = options.index(lvlIn) + 1
+                except:
+                    continue
             if lvlIn == 4 and (self.LCK <5 or self.LCK > -5):
                 print("You don't have access to the LCK stat!")
             elif (lvlIn == 7 or lvlIn == 8) and self.manaEnabled == False:
@@ -155,6 +158,10 @@ class Character(object):
         elif selection == 10:
             self.weapon[3] += 4
             self.weapon[4] += 1
+        self.HP[0] = self.HP[1]
+        if self.manaEnabled == True:
+            self.MP[0] = self.MP[1]
+            self.PP[0] = self.PP[1]
 
     def rolltoAttack(self):
         if self.BAS == "STR":

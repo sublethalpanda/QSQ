@@ -180,7 +180,9 @@ class Player(Character):
             self.attack(entities[selection])
         return True
     def rest(self):
+        print("Resting...")
         self.HP[0] = self.HP[1]
         if self.manaEnabled == True:
             self.MP[0] = self.MP[1]
+            print("Vitality restored!")
             self.PP[0] = self.PP[1]

@@ -84,7 +84,9 @@ def room(x,y,direc):
         if direc == "w":
             return False
         else:
-            combat([Globals.player, Gnoblin(Globals.player.level + 10)])
+            if Globals.miniBoss == False:
+                combat([Globals.player, Gnoblin(25)])
+                Globals.miniBoss = True
             return True
     elif position == [2,4]:
         print("This is the resting room")
@@ -113,7 +115,6 @@ def room(x,y,direc):
         if direc == "w":
             return False
     elif position == [4,5]:
-        print("You need a key to continue")
         if direc == "e":
             return False
         else:
@@ -121,8 +122,14 @@ def room(x,y,direc):
     elif position == [2,6]:
         return True
     elif position == [4,6]:
-        combat([Globals.player, Gnoblin(Globals.player.level + 20)])
-        return True
+        if Globals.doorUnlocked == True:
+            if Globals.defeatBoss == False:
+                combat([Globals.player, Gnoblin(60)])
+                Globals.defeatBoss = True
+            return True
+        else:
+            print("You need a key to unlock this door!")
+            return False
     else:
         return False
     return True
@@ -175,4 +182,4 @@ def checkDirect(userIn):
         print("You can't go that way!")
     else:
         if randint(1,3) == 1 and position != [2,0] and position!= [1,4] and position != [4,6] and position !=[2,4]:
-            combat([Globals.player, Gnoblin(max(1, randint(Globals.player.level - 5, Globals.player.level + 5)))])
+            combat([Globals.player, Gnoblin(min(randint(15,25),max(1, randint(Globals.player.level - 5, Globals.player.level + 5))))])

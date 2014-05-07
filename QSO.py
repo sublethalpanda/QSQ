@@ -66,7 +66,7 @@ def getInput():
     exec(sel.codeToExecute)
 
 def quitGame():
-    userIn = input("Would you like to save first?").lower()
+    userIn = input("Would you like to save first?\n>").lower()
     if "y" in userIn:
         save()
     Globals.quitGame = True
