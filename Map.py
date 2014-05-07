@@ -4,16 +4,17 @@ from Gnoblin import Gnoblin
 import Globals
 position = [2,1]
 mapQuitFlag = False
-initFlag = False
+# initFlag = False
 #Test Input
 def positionCheck():
     return position
 
 def mapMain(userIn):
-    global initFlag
-    if initFlag == False:
-        roomDesc(position[0],position[1])
-        initFlag = True
+#     global initFlag
+#     if initFlag == False:
+#         roomDesc(position[0],position[1])
+#         print("First room desc")
+#         initFlag = True
     global mapQuitFlag
     userIn = userIn[0:1]
     checkDirect(userIn)
