@@ -135,7 +135,6 @@ class Character(object):
                 self.MP[1] += self.MND*self.MP[3]
                 self.PP[1] += self.MND*self.PP[3]
             elif self.manaEnabled == False and self.MND >= 5:
-                print("You've gained Mana and Psychic points!")
                 self.manaEnabled = True
                 mpTemp = randint(1,4)+self.MND
                 #Temp,Max,Die,Rolls,Bonus
