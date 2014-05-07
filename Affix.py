@@ -82,7 +82,35 @@ class Suffix(Affix):
     Devil=50
     Gnoblinoid = 60
     Dragon = 70
-
+    Abyss = 100
+    Catacombs = 101
+    Caverns = 102
+    Citadel = 103
+    City = 104
+    Cyst = 105
+    Depths = 106
+    Dungeons = 107
+    Fane = 108
+    Fortress = 109
+    Halls = 110
+    Haunts = 111
+    Isle = 112
+    Keep = 113
+    Labyrinth = 114
+    Manse = 115
+    Maze = 116
+    Milieu = 117
+    Mines = 118
+    Mountain = 119
+    Oubliette = 120
+    Panopticon = 121
+    Pits = 122
+    Ruins = 123
+    Sanctum = 124
+    Shambles = 125
+    Temple = 126
+    Tower = 127
+    Vault = 128
 
 @unique
 class Prefix(Affix):
@@ -95,10 +123,13 @@ class Prefix(Affix):
     Legless = -60
     BatmanCosplay = -58
     Armless = -50
+    Lonely = -21
+    Lost = -20
     CheesyJokes = -17
     Insert = -16
     DunkinDonuts = -13
     Drunkin = -12
+    Weird = -8
     Sightless = -7
     Puppy = -5
     Angushied = -4
@@ -131,10 +162,43 @@ class Prefix(Affix):
     Haensel = 24
     Michael = 25
     PurplePeoplEater=26
-    FireNation=27
-    WaterBending=28
+    FireNation = 27
+    WaterBending = 28
+    Accursed = 29
+    Ancient = 30
+    Baneful = 31
+    Batrachian = 32
+    Black = 33
+    Bloodstained = 34
+    Cold = 35
+    Dark = 36
+    Devouring = 37
+    Diabolical = 38
+    Ebon = 39
+    Eldritch = 40
+    Forbidden = 41
+    Forgotten = 42
+    Haunted = 43
+    Hidden = 44
+    Malevolent = 45
+    Misplaced = 46
+    Nameless = 47
+    Ophidian = 48
+    Scarlet = 49
     OakenShieldless = 50
     DonkeyKong = 51
+    Secret = 52
+    Shrouded = 53
+    Squamous = 54
+    Strange = 55
+    Tenebrous = 56
+    Uncanny = 57
+    Unspeakable = 58
+    Unvanquishable = 59
+    Unwholesome = 60
+    Vanishing = 61
+    LiamNeesons = 62
+    Articuno = 63
     Pegaus = 100
     Skinner = 111
     RainbowRiding=117
@@ -206,7 +270,7 @@ def getGnoblinName(level):
 # ##97-98 Vanishing
 # ##99-00 Weird
 # ##
-# ##
+# ##DONE_______________
 # ##Table II
 # ##Dice: Result
 # ##01-02 Abyss
@@ -300,3 +364,50 @@ def getGnoblinName(level):
 ##
 ##http://www.basicfantasy.org/dungeoneer.html
 ##
+
+
+
+
+#The Axolotl
+##03-04 Blood
+##05-06 Bones
+##07-08 Chaos
+##12-13 Curses
+##14-15 the Dead
+##16-17 Death
+##18-19 Demons
+##20-21 Despair
+##22-23 Deviltry
+##24-25 Doom
+##30-31 Evil
+##32-33 Fire
+##34-35 Frost
+##38-39 Gloom
+##40-41 Hells
+##42-43 Horrors
+##44-45 Ichor
+##46-47 Id Insinuation
+##50-51 Iron
+##52-53 Madness
+##54-55 Mirrors
+##56-57 Mists
+##58-59 Monsters
+##60-61 Mystery
+##62-63 Necromancy
+##64-65 Oblivion
+##69-70 Peril
+##71-72 Phantasms
+##73-74 Random Harlots
+##75-76 Secrets
+##77-78 Shadows
+##79-80 Sigils
+##81-82 Skulls
+##83-84 Slaughter
+##85-86 Sorcery
+##87-88 Syzygy
+##89-90 Terror
+##91-92 Torment
+##93-94 Treasure
+##95-96 The Undercity
+##97-98 The Underworld
+##99-00 The Unknown
