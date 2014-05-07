@@ -4,17 +4,11 @@ from Gnoblin import Gnoblin
 import Globals
 position = [2,1]
 mapQuitFlag = False
-# initFlag = False
-#Test Input
+
 def positionCheck():
     return position
 
 def mapMain(userIn):
-#     global initFlag
-#     if initFlag == False:
-#         roomDesc(position[0],position[1])
-#         print("First room desc")
-#         initFlag = True
     global mapQuitFlag
     userIn = userIn[0:1]
     checkDirect(userIn)
@@ -98,7 +92,7 @@ def room(x,y,direc):
             return False
         else:
             if Globals.miniBoss == False:
-                combat([Globals.player, Gnoblin(25)])
+                combat([Globals.player, Gnoblin(Globals.levelInit+25)])
                 Globals.miniBoss = True
             return True
     elif position == [2,4]:
@@ -137,7 +131,7 @@ def room(x,y,direc):
     elif position == [4,6]:
         if Globals.doorUnlocked == True:
             if Globals.defeatBoss == False:
-                combat([Globals.player, Gnoblin(60)])
+                combat([Globals.player, Gnoblin(Globals.levelInit+60)])
                 Globals.defeatBoss = True
             return True
         else:
@@ -195,4 +189,4 @@ def checkDirect(userIn):
         print("You can't go that way!")
     else:
         if randint(1,3) == 1 and position != [2,0] and position!= [1,4] and position != [4,6] and position !=[2,4]:
-            combat([Globals.player, Gnoblin(min(randint(15,25),max(1, randint(Globals.player.level - 5, Globals.player.level + 5))))])
+            combat([Globals.player, Gnoblin(min(randint(15,25),max(1, randint(Globals.player.level - 5, Globals.player.level + 5)))+Globals.levelInit )])

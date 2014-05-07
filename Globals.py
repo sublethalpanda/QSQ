@@ -14,3 +14,4 @@ doorUnlocked = False
 gameState = False
 quitGame = False
 getKey = False
+levelInit = 0
