@@ -6,12 +6,12 @@ def combat(entities):
     while combat:
         for i in range(0, len(sEntities)):
             combat = sEntities[i].hitSomething(sEntities[:])
-            print("HP:",str(Globals.player.HP[0])+"/"+str(Globals.player.HP[1]))
         for en in sEntities:
             if en.dead():
                 sEntities.remove(en)
         if Globals.player not in sEntities or len(sEntities) <= 1:
             combat = False
+        Globals.player.printCombat()
     if Globals.player.dead():
         print("You have been slain!")
         Globals.quitGame = True

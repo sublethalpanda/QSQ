@@ -243,3 +243,10 @@ class Character(object):
 
     def hitSomething(self, target):
         print("super call")
+    def printCombat(self):
+        pString = self.name,"\nHP:",str(self.HP[0])+"/"+str(self.HP[1])
+        if self.manaEnabled:
+            pString += "\nMP:",str(self.MP[0])+"/"+str(self.MP[1])+"\nPP:",str(self.PP[0])+"/"+str(self.PP[1])
+        print(pString)
+    def printMood(self):
+        pass

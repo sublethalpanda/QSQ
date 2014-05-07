@@ -21,7 +21,8 @@ def room(x,y,direc):
     if position == [2,0]:
         #Exit
         print("You exit the cave")
-        Globals.gameState = "Running"
+        #Globals.gameState = "Running"
+        Globals.quitGame = True
         flag = True
         return True
     elif position == [2,1]:

@@ -67,7 +67,7 @@ def getInput():
         valid = False
         selection = None
         while not valid:
-            valInput = input("What would you like to do? " + str(stroptions) + "\n>").lower()
+            valInput = input("\nWhat would you like to do? " + str(stroptions) + "\n>").lower()
             for sel in options:
                 if sel.validSel(valInput):
                     valid = True
@@ -139,4 +139,5 @@ def newGamePlus():
     Globals.levelInit = Globals.player.level
     Map.position = [2,1]
     Map.roomDesc[Map.position[0],Map.position[1]]
+    print("\nNew game started!\n")
 _main()
