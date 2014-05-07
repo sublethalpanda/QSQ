@@ -81,7 +81,7 @@ def testCombat():
     combat(entities)
 
 def create():
-    Globals.player = Globals.player()
+    Globals.player = Player()
     Globals.gameState = "Dungeon"
     a,b = Map.positionCheck()
     Map.roomDesc(a,b)
