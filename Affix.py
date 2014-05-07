@@ -57,16 +57,32 @@ class Suffix(Affix):
     Face = -12
     Hobo=-6
     Drunk = -3
+    Programmer = -2
+    Teddy = -1
     Gnoblin = 0
+    Fish = 1
+    Turtle = 2
     Man = 3
     Troll = 4
+    Senior = 5
+    Hippo = 6
+    Teacup =7
+    Monster = 8
+    Chair = 9
     Copter = 10
+    Thwopter = 11
     King = 12
     Haensel = 13
     Oakenshield = 14
+    ThwopterCopter = 15
+    Breaker = 16
+    Here = 17
     Elf=27
     WhoMustNotBeNamed = 40
     Devil=50
+    Gnoblinoid = 60
+    Dragon = 70
+
 
 @unique
 class Prefix(Affix):
@@ -80,6 +96,7 @@ class Prefix(Affix):
     BatmanCosplay = -58
     Armless = -50
     CheesyJokes = -17
+    Insert = -16
     DunkinDonuts = -13
     Drunkin = -12
     Sightless = -7
