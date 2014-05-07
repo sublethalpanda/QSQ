@@ -32,11 +32,11 @@ def getInput():
     if Globals.gameState == "Dungeon":
         options.append(Selection("Move(N,S,E,W)",["n","north","s","south","e","east","w","west"],"Map.mapMain(valInput)"))
         if Map.positionCheck() == [0,4]:
-            if "key" not in Globals.player.inventory:
-                options.append(Selection("Get Key",["get","get key"],"getKey()"))
+            if Globals.getKey == False:
+                options.append(Selection("Get Key",["get","get key"],"Globals.getKey= True"))
         elif Map.positionCheck() == [4,5]:
             if Globals.doorUnlocked == False:
-                if Globals.player.inventory[0] == "key":
+                if Globals.getKey:
                     options.append(Selection("Unlock Door",["unlock","unlock door"],"Globals.doorUnlocked = True"))
         if Map.positionCheck() == [2,4]:
             options.append(Selection("Rest",["rest"],"Globals.player.rest()"))
@@ -92,6 +92,11 @@ def save():
         os.remove("player.qso")
     pickle.dump(Globals.player, open( "player.qso","wb"))
     print("Save complete!")
+    if os.path.isfile("progress.qso"):
+        os.remove("progress.qso")
+    x,y = Map.positionCheck()
+    globalsList = [Globals.doorUnlocked, Globals.miniBoss, Globals.defeatBoss, Globals.getKey,x,y]
+    pickle.dump(globalsList, open( "progress.qso","wb"))
 
 def load():
     print("Loading")
@@ -102,10 +107,14 @@ def load():
         Globals.gameState = "Dungeon"
         print(Globals.player.name,"loaded successfully.")
         a,b = Map.positionCheck()
-        Map.roomDesc(a,b)
+        globalsList = pickle.load( open("progress.qso","rb"))
+        Globals.doorUnlocked = globalsList[0]
+        Globals.miniBoss = globalsList[1]
+        Globals.defeatBoss = globalsList[2]
+        Globals.getKey = globalsList[3]
+        Map.position = [globalsList[4],globalsList[5]]
+        Map.roomDesc(globalsList[4],globalsList[5])
     else:
         print("Player not found")
-def getKey():
-    Globals.player.inventory.append(["item","key"])
 
 _main()

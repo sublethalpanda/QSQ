@@ -74,7 +74,7 @@ def room(x,y,direc):
         else:
             return True
     elif position ==[0,4]:
-        if "key" in Globals.player.inventory:
+        if Globals.getKey == False:
             print("There is a key here.")
         if direc == "n":
             return False
